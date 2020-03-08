@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.AuthRoleResourceMapper">
+    <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.AuthRoleResource">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="resource_id" property="resourceId" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, role_id, resource_id, created_at, updated_at, deleted
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_role_resource
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auth_role_resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByRole">
+        delete from auth_role_resource
+        where role_id = #{roleId}
+    </delete>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.AuthRoleResource">
+    insert into auth_role_resource (id, role_id, resource_id, 
+      created_at, updated_at, deleted
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.AuthRoleResource">
+        insert into auth_role_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="resourceId != null">
+                resource_id,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="resourceId != null">
+                #{resourceId,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.AuthRoleResource">
+        update auth_role_resource
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="resourceId != null">
+                resource_id = #{resourceId,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.AuthRoleResource">
+    update auth_role_resource
+    set role_id = #{roleId,jdbcType=INTEGER},
+      resource_id = #{resourceId,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="getMenuList" resultType="com.thundersdata.backend.basic.dto.AuthResourceDTO">
+    select id,
+       ar.resource_key resourceKey,
+       ar.name,
+       ar.order_value orderValue,
+       ar.api_url apiUrl,
+       ar.icon_url apiUrl,
+       ar.type,
+       ar.description,
+       ar.parent_id parentId,
+       ar.business
+    from auth_resource ar
+      where deleted = 0
+    </select>
+    <select id="selectByRole" resultType="java.lang.Integer">
+    select resource_id
+    from auth_role_resource
+      where deleted = 0
+        and role_id = #{roleId};
+    </select>
+    <select id="getPermissionByUrlWithValue" resultType="com.thundersdata.backend.basic.model.AuthResource">
+        select
+           t1.id,
+           resource_key resourceKey,
+           api_url apiUrl,
+           icon_url iconUrl,
+           parent_id parentId,
+           order_value orderValue
+        from auth_resource t1
+               left join auth_role_resource prr on prr.resource_id = t1.id and prr.deleted = 0
+               left join auth_role_user pru on pru.role_id = prr.role_id and pru.deleted = 0
+        where t1.deleted = 0
+          and user_id = #{userId}
+          and api_url = #{apiUrl}
+    </select>
+
+    <insert id="replaceIntoByRole">
+        replace into auth_role_resource (role_id, resource_id)
+        values
+        <foreach collection="menuList" item="item" index="index" separator=",">
+            (
+            #{roleId},
+            #{item}
+            )
+        </foreach>
+
+    </insert>
+</mapper>

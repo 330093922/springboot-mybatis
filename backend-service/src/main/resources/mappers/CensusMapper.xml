@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.CensusMapper" >
+    <!-- 查询通用结果列 -->
+    <resultMap id="baseResultColumn" type="com.thundersdata.backend.basic.dto.CensusDTO">
+    </resultMap>
+
+    <!-- 接口4：新运单、运输中、已完成运单统计 -->
+    <select id="wayBillCensus" resultMap="baseResultColumn">
+        select count(1) as countNum, 'newOrder' as wayBillType
+        from waybill_order where status in ('0','1','2') and is_deleted = 0
+        UNION
+        select count(1) as countNum, 'OngoingOrder' as wayBillType
+        from waybill_order where status in ('3','4') and is_deleted = 0
+        UNION
+        select count(1) as countNum, 'finishOrder' as wayBillType
+        from waybill_order where status in ('5','6') and is_deleted = 0
+    </select>
+
+    <!-- 接口5：统计企业总数、车辆总数、人员总数 -->
+    <select id="evpCensus" resultMap="baseResultColumn">
+        select count(1) as countNum, 'enterprise' as countType
+        from waybill_owner where is_deleted = 0
+        union
+        select count(1) as countNum, 'vehicle' as countType
+        from waybill_vehicle where is_deleted = 0
+        union
+        select count(1) as countNum, 'people' as countType
+        from waybill_user where is_deleted = 0
+    </select>
+
+    <!-- 接口6：押运员或司机的运单个数排名 -->
+    <select id="driverCensus" resultMap="baseResultColumn">
+        select countNum, pname from (
+        select count(1) as countNum, b.name as pname
+        from waybill_order as a
+        inner join waybill_user as b on a.pilot_id = b.id
+        where a.is_deleted = 0 and b.is_deleted = 0
+        group by b.name
+        union
+        select count(1) as countNum, b.name as pname
+        from waybill_order as a
+        inner join waybill_user as b on a.supercargo_id = b.id
+        where a.is_deleted = 0 and b.is_deleted = 0
+        group by b.name
+    ) as peopleOrder order by countNum desc limit 0, 10
+    </select>
+
+    <!-- 接口8：企业分类占比 -->
+    <select id="componySortCensus" resultMap="baseResultColumn">
+        select count(1) as countNum, owner_type as ownerType
+        from waybill_owner
+        where owner_type in ('1','2','3','4','5','6') and is_deleted = 0
+        GROUP BY owner_type
+    </select>
+
+    <!-- 接口7：已托运、未托运、已完成托运单统计 -->
+    <!--
+
+        select count(1) as countNum, 'alreadyTransport' as wayBillType
+        from waybill_order where status in ('0','1','2') and is_deleted = 0
+        UNION
+        select count(1) as countNum, 'notYetTransport' as wayBillType
+        from waybill_order where status in ('3','4') and is_deleted = 0
+        UNION
+        select count(1) as countNum, 'finishOrder' as wayBillType
+        from waybill_order where status in ('5','6') and is_deleted = 0
+
+    -->
+    <select id="orderCensus" resultMap="baseResultColumn">
+        select (select count(1) as countNum
+        from waybill_order where status in ('0','1','2') and is_deleted = 0)
+        /(select count(1) as countNum from waybill_order where is_deleted = 0) as percent, 'alreadyTransport' as wayBillType
+        UNION
+        select (select count(1) as countNum
+        from waybill_order where status in ('3','4') and is_deleted = 0)
+        /(select count(1) as countNum from waybill_order where is_deleted = 0) as percent, 'notYetTransport' as wayBillType
+        UNION
+        select (select count(1) as countNum
+        from waybill_order where status in ('5','6') and is_deleted = 0)/
+        (select count(1) as countNum from waybill_order where is_deleted = 0) as percent, 'finishOrder' as wayBillType
+    </select>
+
+    <!-- 接口1：统计长期未填报运单的车辆 -->
+    <select id="vehicleCensus" resultMap="baseResultColumn">
+        select a.vehicle_id, b.vehicle_code, a.shipment_id, c.owner_name, a.created_at
+        from waybill_order as a
+        left join waybill_vehicle as b on a.vehicle_id = b.id
+        left join waybill_owner as c on a.shipment_id = c.id
+        where a.is_deleted = 0 and b. is_deleted = 0 and c.is_deleted = 0
+        order by created_at asc limit 0, 8
+    </select>
+
+    <!-- 前四大运输公司运输占比 -->
+    <select id="fourGreatOwner" resultMap="baseResultColumn">
+        select count(1) as countNum, a.shipment_id, b.owner_name
+        from waybill_order as a
+        inner join waybill_owner as b on a.shipment_id = b.id
+        group by a.shipment_id, b.owner_name
+        limit 0, 4
+    </select>
+
+    <!-- 本市企业发货与收货运单数占比 -->
+    <select id="shipReceivePercent" resultMap="baseResultColumn">
+        select (select count(1) as countNum
+        from waybill_order as a
+        left join waybill_owner as b on a.shipper_id = b.id
+        where b.city = '370300' and a.is_deleted = 0)/(select count(1) as countNum from waybill_order where is_deleted = 0) as percent, 'shipper' as ownerTypeCn
+        union
+        select (select count(1) as countNum
+        from waybill_order as a
+        left join waybill_owner as b on a.receiving_id = b.id
+        where b.city = '370300' and a.is_deleted = 0)/(select count(1) as countNum from waybill_order where is_deleted = 0) as percent, 'receiving' as ownerTypeCn
+    </select>
+
+    <!-- 过去8天运单数统计 -->
+    <select id="eightOrders" resultMap="baseResultColumn">
+        select count(1) as countNum, DATE_FORMAT(created_at,'%m-%d') as createTime
+        from waybill_order
+        where is_deleted = 0
+        group by DATE_FORMAT(created_at,'%m-%d')
+        order by DATE_FORMAT(created_at,'%m-%d') desc
+        limit 0, 8
+    </select>
+</mapper>

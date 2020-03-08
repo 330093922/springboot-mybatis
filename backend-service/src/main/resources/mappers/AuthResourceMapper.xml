@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.AuthResourceMapper">
+    <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.AuthResource">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="resource_key" property="resourceKey" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="order_value" property="orderValue" jdbcType="INTEGER"/>
+        <result column="api_url" property="apiUrl" jdbcType="VARCHAR"/>
+        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="business" property="business" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
+    </resultMap>
+    <resultMap id="DTOBaseResultMap" type="com.thundersdata.backend.basic.dto.AuthResourceDTO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="resource_key" property="resourceKey" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="order_value" property="orderValue" jdbcType="INTEGER"/>
+        <result column="api_url" property="apiUrl" jdbcType="VARCHAR"/>
+        <result column="icon_url" property="iconUrl" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="INTEGER"/>
+        <result column="business" property="business" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, resource_key, name, order_value, api_url, icon_url, type, description, parent_id, 
+    business, created_at, updated_at, deleted
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_resource
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auth_resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.AuthResource">
+    insert into auth_resource (id, resource_key, name, 
+      order_value, api_url, icon_url, 
+      type, description, parent_id, 
+      business, created_at, updated_at, 
+      deleted)
+    values (#{id,jdbcType=INTEGER}, #{resourceKey,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{orderValue,jdbcType=INTEGER}, #{apiUrl,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{business,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.AuthResource">
+        insert into auth_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="resourceKey != null">
+                resource_key,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="orderValue != null">
+                order_value,
+            </if>
+            <if test="apiUrl != null">
+                api_url,
+            </if>
+            <if test="iconUrl != null">
+                icon_url,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="business != null">
+                business,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="resourceKey != null">
+                #{resourceKey,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="orderValue != null">
+                #{orderValue,jdbcType=INTEGER},
+            </if>
+            <if test="apiUrl != null">
+                #{apiUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null">
+                #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="business != null">
+                #{business,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.AuthResource">
+        update auth_resource
+        <set>
+            <if test="resourceKey != null">
+                resource_key = #{resourceKey,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="orderValue != null">
+                order_value = #{orderValue,jdbcType=INTEGER},
+            </if>
+            <if test="apiUrl != null">
+                api_url = #{apiUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="iconUrl != null">
+                icon_url = #{iconUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="business != null">
+                business = #{business,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.AuthResource">
+    update auth_resource
+    set resource_key = #{resourceKey,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      order_value = #{orderValue,jdbcType=INTEGER},
+      api_url = #{apiUrl,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      business = #{business,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByIdList" resultMap="DTOBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_resource
+        where deleted = 0
+        and id in
+        <foreach collection="resourceList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+    </select>
+    <select id="selectByMap" resultMap="DTOBaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_resource
+        where deleted = 0
+    </select>
+
+</mapper>

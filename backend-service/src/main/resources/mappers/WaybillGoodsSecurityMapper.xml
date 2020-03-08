@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillGoodsSecurityMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillGoodsSecurity" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="image_one" property="imageOne" jdbcType="VARCHAR" />
+    <result column="image_tow" property="imageTow" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillGoodsSecurityWithBLOBs" extends="BaseResultMap" >
+    <result column="risk" property="risk" jdbcType="LONGVARCHAR" />
+    <result column="requirements" property="requirements" jdbcType="LONGVARCHAR" />
+    <result column="reveal" property="reveal" jdbcType="LONGVARCHAR" />
+    <result column="emergency" property="emergency" jdbcType="LONGVARCHAR" />
+    <result column="extinguisher" property="extinguisher" jdbcType="LONGVARCHAR" />
+    <result column="protective" property="protective" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapDTO" type="com.thundersdata.backend.basic.dto.WaybillGoodsSecurityDTO" extends="ResultMapWithBLOBs" >
+    <result column="risk" property="risk" jdbcType="LONGVARCHAR" />
+    <result column="requirements" property="requirements" jdbcType="LONGVARCHAR" />
+    <result column="reveal" property="reveal" jdbcType="LONGVARCHAR" />
+    <result column="emergency" property="emergency" jdbcType="LONGVARCHAR" />
+    <result column="extinguisher" property="extinguisher" jdbcType="LONGVARCHAR" />
+    <result column="protective" property="protective" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goods_id, image_one, image_tow, created_at, updated_at, is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    risk, requirements, reveal, emergency, extinguisher, protective
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_goods_security
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByGoodsId" resultMap="ResultMapDTO">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_goods_security
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_goods_security
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByGoodsId" parameterType="java.lang.Integer" >
+    delete from waybill_goods_security
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillGoodsSecurityWithBLOBs" >
+    insert into waybill_goods_security (id, goods_id, image_one, 
+      image_tow, created_at, updated_at, 
+      is_deleted, risk, requirements, 
+      reveal, emergency, extinguisher, 
+      protective)
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{imageOne,jdbcType=VARCHAR}, 
+      #{imageTow,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=TINYINT}, #{risk,jdbcType=LONGVARCHAR}, #{requirements,jdbcType=LONGVARCHAR}, 
+      #{reveal,jdbcType=LONGVARCHAR}, #{emergency,jdbcType=LONGVARCHAR}, #{extinguisher,jdbcType=LONGVARCHAR}, 
+      #{protective,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillGoodsSecurityWithBLOBs" >
+    insert into waybill_goods_security
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="imageOne != null" >
+        image_one,
+      </if>
+      <if test="imageTow != null" >
+        image_tow,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="risk != null" >
+        risk,
+      </if>
+      <if test="requirements != null" >
+        requirements,
+      </if>
+      <if test="reveal != null" >
+        reveal,
+      </if>
+      <if test="emergency != null" >
+        emergency,
+      </if>
+      <if test="extinguisher != null" >
+        extinguisher,
+      </if>
+      <if test="protective != null" >
+        protective,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="imageOne != null" >
+        #{imageOne,jdbcType=VARCHAR},
+      </if>
+      <if test="imageTow != null" >
+        #{imageTow,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="risk != null" >
+        #{risk,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirements != null" >
+        #{requirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reveal != null" >
+        #{reveal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="emergency != null" >
+        #{emergency,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="extinguisher != null" >
+        #{extinguisher,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="protective != null" >
+        #{protective,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillGoodsSecurityWithBLOBs" >
+    update waybill_goods_security
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="imageOne != null" >
+        image_one = #{imageOne,jdbcType=VARCHAR},
+      </if>
+      <if test="imageTow != null" >
+        image_tow = #{imageTow,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="risk != null" >
+        risk = #{risk,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirements != null" >
+        requirements = #{requirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reveal != null" >
+        reveal = #{reveal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="emergency != null" >
+        emergency = #{emergency,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="extinguisher != null" >
+        extinguisher = #{extinguisher,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="protective != null" >
+        protective = #{protective,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillGoodsSecurityWithBLOBs" >
+    update waybill_goods_security
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      image_one = #{imageOne,jdbcType=VARCHAR},
+      image_tow = #{imageTow,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      risk = #{risk,jdbcType=LONGVARCHAR},
+      requirements = #{requirements,jdbcType=LONGVARCHAR},
+      reveal = #{reveal,jdbcType=LONGVARCHAR},
+      emergency = #{emergency,jdbcType=LONGVARCHAR},
+      extinguisher = #{extinguisher,jdbcType=LONGVARCHAR},
+      protective = #{protective,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillGoodsSecurity" >
+    update waybill_goods_security
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      image_one = #{imageOne,jdbcType=VARCHAR},
+      image_tow = #{imageTow,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

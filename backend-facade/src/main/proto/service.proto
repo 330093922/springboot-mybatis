@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+option java_package = "com.thundersdata.backend.facade.grpc";
+
+service GreeterService {
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc SayTest(google.protobuf.Int32Value) returns (google.protobuf.Int32Value) {}
+  rpc HelloException(HelloRequest) returns (HelloReply) {}
+}
+
+message HelloRequest {
+   string name = 1;
+   int32 age = 2;
+}
+
+// The response message containing the greetings
+message HelloReply {
+   string message = 1;
+}

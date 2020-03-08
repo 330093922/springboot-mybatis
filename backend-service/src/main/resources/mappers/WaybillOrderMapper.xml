@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillOrderMapper">
+    <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillOrder">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="qr_code" property="qrCode" jdbcType="VARCHAR"/>
+        <result column="shipper_id" property="shipperId" jdbcType="INTEGER"/>
+        <result column="receiving_id" property="receivingId" jdbcType="INTEGER"/>
+        <result column="shipment_start" property="shipmentStart" jdbcType="VARCHAR"/>
+        <result column="shipment_stop" property="shipmentStop" jdbcType="VARCHAR"/>
+        <result column="is_city" property="isCity" jdbcType="TINYINT"/>
+        <result column="shipment_time" property="shipmentTime" jdbcType="TIMESTAMP"/>
+        <result column="shipment_arrive" property="shipmentArrive" jdbcType="TIMESTAMP"/>
+        <result column="shipment_id" property="shipmentId" jdbcType="INTEGER"/>
+        <result column="pilot_id" property="pilotId" jdbcType="INTEGER"/>
+        <result column="supercargo_id" property="supercargoId" jdbcType="INTEGER"/>
+        <result column="vehicle_id" property="vehicleId" jdbcType="INTEGER"/>
+        <result column="trailer_id" property="trailerId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="node_id" property="nodeId" jdbcType="INTEGER"/>
+        <result column="scheduling_user" property="schedulingUser" jdbcType="INTEGER"/>
+        <result column="scheduling_date" property="schedulingDate" jdbcType="TIMESTAMP"/>
+        <result column="expediter" property="expediter" jdbcType="VARCHAR"/>
+        <result column="expediter_phone" property="expediterPhone" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+    <resultMap id="DTOResultMap" type="com.thundersdata.backend.basic.dto.WaybillOrderDTO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="consignment_id" property="consignmentId" jdbcType="INTEGER"/>
+        <result column="consign_code" property="consignCode" jdbcType="VARCHAR"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="qr_code" property="qrCode" jdbcType="VARCHAR"/>
+        <result column="shipper_id" property="shipperId" jdbcType="INTEGER"/>
+        <result column="receiving_id" property="receivingId" jdbcType="INTEGER"/>
+        <result column="shipment_start" property="shipmentStart" jdbcType="VARCHAR"/>
+        <result column="shipment_stop" property="shipmentStop" jdbcType="VARCHAR"/>
+        <result column="is_city" property="isCity" jdbcType="TINYINT"/>
+        <result column="shipment_time" property="shipmentTime" jdbcType="TIMESTAMP"/>
+        <result column="shipment_arrive" property="shipmentArrive" jdbcType="TIMESTAMP"/>
+        <result column="shipment_id" property="shipmentId" jdbcType="INTEGER"/>
+        <result column="pilot_id" property="pilotId" jdbcType="INTEGER"/>
+        <result column="supercargo_id" property="supercargoId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="node_id" property="nodeId" jdbcType="INTEGER"/>
+        <result column="scheduling_user" property="schedulingUser" jdbcType="INTEGER"/>
+        <result column="scheduling_date" property="schedulingDate" jdbcType="TIMESTAMP"/>
+        <result column="expediter" property="expediter" jdbcType="VARCHAR"/>
+        <result column="expediter_phone" property="expediterPhone" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+        <result column="pilotName" property="pilotName" jdbcType="VARCHAR"/>
+        <result column="supercargoName" property="supercargoName" jdbcType="VARCHAR"/>
+        <result column="vehicleCode" property="vehicleCode" jdbcType="VARCHAR"/>
+        <result column="trailerCode" property="trailerCode" jdbcType="VARCHAR"/>
+        <result column="shipperName" property="shipperName" jdbcType="VARCHAR"/>
+        <result column="receivingName" property="receivingName" jdbcType="VARCHAR"/>
+        <result column="shipmentName" property="shipmentName" jdbcType="VARCHAR"/>
+        <result column="pilotPhone" property="pilotPhone" jdbcType="VARCHAR"/>
+        <result column="pilotCard" property="pilotCard" jdbcType="VARCHAR"/>
+        <result column="supercargoPhone" property="supercargoPhone" jdbcType="VARCHAR"/>
+        <result column="supercargoCard" property="supercargoCard" jdbcType="VARCHAR"/>
+        <result column="vehicleCard" property="vehicleCard" jdbcType="VARCHAR"/>
+        <result column="trailerCard" property="trailerCard" jdbcType="VARCHAR"/>
+        <result column="shipperContact" property="shipperContact" jdbcType="VARCHAR"/>
+        <result column="shipperContactPhone" property="shipperContactPhone" jdbcType="VARCHAR"/>
+        <result column="shipperCreditCode" property="shipperCreditCode" jdbcType="VARCHAR"/>
+        <result column="receivingContact" property="receivingContact" jdbcType="VARCHAR"/>
+        <result column="receivingContactPhone" property="receivingContactPhone" jdbcType="VARCHAR"/>
+        <result column="receivingCreditCode" property="receivingCreditCode" jdbcType="VARCHAR"/>
+        <result column="shipmentContact" property="shipmentContact" jdbcType="VARCHAR"/>
+        <result column="shipmentContactPhone" property="shipmentContactPhone" jdbcType="VARCHAR"/>
+        <result column="shipmentCreditCode" property="shipmentCreditCode" jdbcType="VARCHAR"/>
+        <result column="nodeName" property="nodeName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="DetailDTOResultMap" type="com.thundersdata.backend.basic.dto.WaybillOrderDTO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="consignment_id" property="consignmentId" jdbcType="INTEGER"/>
+        <result column="consign_code" property="consignCode" jdbcType="VARCHAR"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="qr_code" property="qrCode" jdbcType="VARCHAR"/>
+        <result column="shipper_id" property="shipperId" jdbcType="INTEGER"/>
+        <result column="receiving_id" property="receivingId" jdbcType="INTEGER"/>
+        <result column="expediter_id" property="expediterId" jdbcType="INTEGER"/>
+        <result column="shipment_start" property="shipmentStart" jdbcType="VARCHAR"/>
+        <result column="shipment_stop" property="shipmentStop" jdbcType="VARCHAR"/>
+        <result column="is_city" property="isCity" jdbcType="TINYINT"/>
+        <result column="shipment_time" property="shipmentTime" jdbcType="TIMESTAMP"/>
+        <result column="shipment_arrive" property="shipmentArrive" jdbcType="TIMESTAMP"/>
+        <result column="shipment_id" property="shipmentId" jdbcType="INTEGER"/>
+        <result column="pilot_id" property="pilotId" jdbcType="INTEGER"/>
+        <result column="supercargo_id" property="supercargoId" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="node_id" property="nodeId" jdbcType="INTEGER"/>
+        <result column="scheduling_user" property="schedulingUser" jdbcType="INTEGER"/>
+        <result column="scheduling_date" property="schedulingDate" jdbcType="TIMESTAMP"/>
+        <result column="expediter" property="expediter" jdbcType="VARCHAR"/>
+        <result column="expediter_phone" property="expediterPhone" jdbcType="VARCHAR"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+        <result column="pilotName" property="pilotName" jdbcType="VARCHAR"/>
+        <result column="supercargoName" property="supercargoName" jdbcType="VARCHAR"/>
+        <result column="vehicleCode" property="vehicleCode" jdbcType="VARCHAR"/>
+        <result column="trailer_id" property="trailerId" jdbcType="INTEGER"/>
+        <result column="trailerCode" property="trailerCode" jdbcType="VARCHAR"/>
+        <result column="shipperName" property="shipperName" jdbcType="VARCHAR"/>
+        <result column="receivingName" property="receivingName" jdbcType="VARCHAR"/>
+        <result column="shipmentName" property="shipmentName" jdbcType="VARCHAR"/>
+        <result column="pilotPhone" property="pilotPhone" jdbcType="VARCHAR"/>
+        <result column="pilotCard" property="pilotCard" jdbcType="VARCHAR"/>
+        <result column="supercargoPhone" property="supercargoPhone" jdbcType="VARCHAR"/>
+        <result column="supercargoCard" property="supercargoCard" jdbcType="VARCHAR"/>
+        <result column="vehicle_id" property="vehicleId" jdbcType="INTEGER"/>
+        <result column="vehicleCard" property="vehicleCard" jdbcType="VARCHAR"/>
+        <result column="trailerCard" property="trailerCard" jdbcType="VARCHAR"/>
+        <result column="shipperContact" property="shipperContact" jdbcType="VARCHAR"/>
+        <result column="shipperContactPhone" property="shipperContactPhone" jdbcType="VARCHAR"/>
+        <result column="shipperCreditCode" property="shipperCreditCode" jdbcType="VARCHAR"/>
+        <result column="receivingContact" property="receivingContact" jdbcType="VARCHAR"/>
+        <result column="receivingContactPhone" property="receivingContactPhone" jdbcType="VARCHAR"/>
+        <result column="receivingCreditCode" property="receivingCreditCode" jdbcType="VARCHAR"/>
+        <result column="shipmentContact" property="shipmentContact" jdbcType="VARCHAR"/>
+        <result column="shipmentContactPhone" property="shipmentContactPhone" jdbcType="VARCHAR"/>
+        <result column="shipmentCreditCode" property="shipmentCreditCode" jdbcType="VARCHAR"/>
+        <result column="nodeName" property="nodeName" jdbcType="VARCHAR"/>
+        <collection property="nodeList"
+                    select="getNodeByOrderCode"
+                    column="{orderCode=order_code}"></collection>
+        <collection property="goodsList"
+                    select="getGoodsByOrderCode"
+                    column="{orderCode=order_code}"></collection>
+    </resultMap>
+    <select id="getNodeByOrderCode" resultType="com.thundersdata.backend.basic.dto.WaybillOrderDetailNodeDTO">
+        select order_code    orderCode,
+               node_id       nodeId,
+               node.name     nodeName,
+               content,
+               t1.created_at createdAt,
+               t1.id
+        from waybill_order_node t1
+               left join waybill_nodes node on t1.node_id = node.id
+        where t1.order_code = #{orderCode}
+        order by t1.node_id asc
+    </select>
+
+    <select id="getGoodsByOrderCode" resultType="com.thundersdata.backend.basic.dto.WaybillOrderGoodsDTO">
+        select order_code      orderCode,
+               t1.created_at   createdAt,
+               t1.id,
+               t1.goods_code   goodsCode,
+               t1.goods_name   goodsName,
+               t1.goods_type   goodsType,
+               t1.goods_size   goodsSize,
+               t1.goods_weight goodsWeight,
+               t1.goods_volume goodsVolume,
+               t1.remark
+
+        from waybill_order_goods t1
+
+        where t1.order_code = #{orderCode}
+        order by t1.id desc
+    </select>
+
+
+    <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillOrderWithBLOBs"
+               extends="BaseResultMap">
+        <result column="attention" property="attention" jdbcType="LONGVARCHAR"/>
+        <result column="measures" property="measures" jdbcType="LONGVARCHAR"/>
+        <result column="remark" property="remark" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, order_code, qr_code, shipper_id, receiving_id,vehicle_id,trailer_id shipment_start, shipment_stop, is_city,
+    shipment_time, shipment_arrive, shipment_id, pilot_id, supercargo_id, status, node_id, expediter, expediter_phone, scheduling_user, scheduling_date,
+    created_at, updated_at, is_deleted
+  </sql>
+    <sql id="Blob_Column_List">
+    attention, measures, remark
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from waybill_order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByOrderCode" resultType="java.lang.String">
+      select max(order_code) from waybill_order where order_code like #{creditCode};
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from waybill_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillOrderWithBLOBs">
+    insert into waybill_order (id, order_code, qr_code, 
+      shipper_id, receiving_id, shipment_start, 
+      shipment_stop, is_city, shipment_time, shipment_arrive,
+      shipment_id, pilot_id, supercargo_id, 
+      status, node_id, scheduling_user, scheduling_date, expediter, expediter_phone, created_at,
+      updated_at, is_deleted, attention, 
+      measures, remark)
+    values (#{id,jdbcType=INTEGER}, #{orderCode,jdbcType=VARCHAR}, #{qrCode,jdbcType=VARCHAR}, 
+      #{shipperId,jdbcType=INTEGER}, #{receivingId,jdbcType=INTEGER}, #{shipmentStart,jdbcType=VARCHAR}, 
+      #{shipmentStop,jdbcType=VARCHAR}, #{isCity,jdbcType=TINYINT}, #{shipmentTime,jdbcType=TIMESTAMP}, #{shipmentArrive,jdbcType=TIMESTAMP},
+      #{shipmentId,jdbcType=INTEGER}, #{pilotId,jdbcType=INTEGER}, #{supercargoId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{nodeId,jdbcType=INTEGER}, #{schedulingUser,jdbcType=INTEGER}, #{schedulingDate,jdbcType=TIMESTAMP},
+      #{expediter,jdbcType=VARCHAR}, #{expediterPhone,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
+      #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, #{attention,jdbcType=LONGVARCHAR}, 
+      #{measures,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillOrderWithBLOBs">
+        insert into waybill_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="consignCode != null">
+                consign_code,
+            </if>
+            <if test="orderCode != null">
+                order_code,
+            </if>
+            <if test="qrCode != null">
+                qr_code,
+            </if>
+            <if test="shipperId != null">
+                shipper_id,
+            </if>
+            <if test="receivingId != null">
+                receiving_id,
+            </if>
+            <if test="shipmentStart != null">
+                shipment_start,
+            </if>
+            <if test="shipmentStop != null">
+                shipment_stop,
+            </if>
+            <if test="isCity != null">
+                is_city,
+            </if>
+            <if test="shipmentTime != null">
+                shipment_time,
+            </if>
+            <if test="shipmentArrive != null">
+                shipment_arrive,
+            </if>
+            <if test="shipmentId != null">
+                shipment_id,
+            </if>
+            <if test="pilotId != null">
+                pilot_id,
+            </if>
+            <if test="supercargoId != null">
+                supercargo_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="nodeId != null">
+                node_id,
+            </if>
+            <if test="schedulingUser != null">
+              scheduling_user,
+            </if>
+            <if test="schedulingDate != null">
+              scheduling_date,
+            </if>
+            <if test="expediter != null">
+              expediter,
+            </if>
+            <if test="expediterPhone != null">
+              expediter_phone,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="attention != null">
+                attention,
+            </if>
+            <if test="measures != null">
+                measures,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="consignCode != null">
+              #{consignCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderCode != null">
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="qrCode != null">
+                #{qrCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shipperId != null">
+                #{shipperId,jdbcType=INTEGER},
+            </if>
+            <if test="receivingId != null">
+                #{receivingId,jdbcType=INTEGER},
+            </if>
+            <if test="shipmentStart != null">
+                #{shipmentStart,jdbcType=VARCHAR},
+            </if>
+            <if test="shipmentStop != null">
+                #{shipmentStop,jdbcType=VARCHAR},
+            </if>
+            <if test="isCity != null">
+                #{is_city,jdbcType=TINYINT},
+            </if>
+            <if test="shipmentTime != null">
+                #{shipmentTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipmentArrive != null">
+                #{shipmentArrive,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipmentId != null">
+                #{shipmentId,jdbcType=INTEGER},
+            </if>
+            <if test="pilotId != null">
+                #{pilotId,jdbcType=INTEGER},
+            </if>
+            <if test="supercargoId != null">
+                #{supercargoId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="nodeId != null">
+                #{nodeId,jdbcType=INTEGER},
+            </if>
+            <if test="schedulingUser != null">
+              #{schedulingUser,jdbcType=INTEGER},
+            </if>
+            <if test="schedulingDate != null">
+              #{schedulingDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expediter != null">
+              #{expediter,jdbcType=VARCHAR},
+            </if>
+            <if test="expediterPhone != null">
+              #{expediterPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="attention != null">
+                #{attention,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="measures != null">
+                #{measures,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillOrderWithBLOBs">
+        update waybill_order
+        <set>
+            <if test="orderCode != null">
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="qrCode != null">
+                qr_code = #{qrCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shipperId != null">
+                shipper_id = #{shipperId,jdbcType=INTEGER},
+            </if>
+            <if test="receivingId != null">
+                receiving_id = #{receivingId,jdbcType=INTEGER},
+            </if>
+            <if test="shipmentStart != null">
+                shipment_start = #{shipmentStart,jdbcType=VARCHAR},
+            </if>
+            <if test="shipmentStop != null">
+                shipment_stop = #{shipmentStop,jdbcType=VARCHAR},
+            </if>
+            <if test="isCity != null">
+              is_city = #{is_city,jdbcType=TINYINT},
+            </if>
+            <if test="shipmentTime != null">
+                shipment_time = #{shipmentTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipmentArrive != null">
+                shipment_arrive = #{shipmentArrive,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipmentId != null">
+                shipment_id = #{shipmentId,jdbcType=INTEGER},
+            </if>
+            <if test="pilotId != null">
+                pilot_id = #{pilotId,jdbcType=INTEGER},
+            </if>
+            <if test="supercargoId != null">
+                supercargo_id = #{supercargoId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="nodeId != null">
+                node_id = #{nodeId,jdbcType=INTEGER},
+            </if>
+            <if test="schedulingUser != null">
+              scheduling_user = #{schedulingUser,jdbcType=INTEGER},
+            </if>
+            <if test="schedulingDate != null">
+              scheduling_date = #{schedulingDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expediter != null">
+              expediter = #{expediter,jdbcType=VARCHAR},
+            </if>
+            <if test="expediterPhone != null">
+              expediter_phone = #{expediterPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="attention != null">
+                attention = #{attention,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="measures != null">
+                measures = #{measures,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillOrderWithBLOBs">
+    update waybill_order
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      shipper_id = #{shipperId,jdbcType=INTEGER},
+      receiving_id = #{receivingId,jdbcType=INTEGER},
+      shipment_start = #{shipmentStart,jdbcType=VARCHAR},
+      shipment_stop = #{shipmentStop,jdbcType=VARCHAR},
+      is_city = #{isCity,jdbcType=TINYINT},
+      shipment_time = #{shipmentTime,jdbcType=TIMESTAMP},
+      shipment_arrive = #{shipmentArrive,jdbcType=TIMESTAMP},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      pilot_id = #{pilotId,jdbcType=INTEGER},
+      supercargo_id = #{supercargoId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      node_id = #{nodeId,jdbcType=INTEGER},
+      scheduling_user = #{schedulingUser,jdbcType=INTEGER},
+      scheduling_date = #{schedulingDate,jdbcType=TIMESTAMP},
+      expediter = #{expediter,jdbcType=VARCHAR},
+      expediter_phone = #{expediterPhone,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      attention = #{attention,jdbcType=LONGVARCHAR},
+      measures = #{measures,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillOrder">
+    update waybill_order
+    set order_code = #{orderCode,jdbcType=VARCHAR},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      shipper_id = #{shipperId,jdbcType=INTEGER},
+      receiving_id = #{receivingId,jdbcType=INTEGER},
+      shipment_start = #{shipmentStart,jdbcType=VARCHAR},
+      shipment_stop = #{shipmentStop,jdbcType=VARCHAR},
+      is_city = #{is_city,jdbcType=TINYINT},
+      shipment_time = #{shipmentTime,jdbcType=TIMESTAMP},
+      shipment_arrive = #{shipmentArrive,jdbcType=TIMESTAMP},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      pilot_id = #{pilotId,jdbcType=INTEGER},
+      supercargo_id = #{supercargoId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      node_id = #{nodeId,jdbcType=INTEGER},
+      scheduling_user = #{schedulingUser,jdbcType=INTEGER},
+      scheduling_date = #{schedulingDate,jdbcType=TIMESTAMP},
+      expediter = #{expediter,jdbcType=VARCHAR},
+      expediter_phone = #{expediterPhone,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="distriBute" parameterType="com.thundersdata.backend.basic.vo.DistriButeVo">
+        update waybill_order
+        set
+        <if test="distriBute.pilotId != null and distriBute.pilotId !=''">
+            pilot_id = #{distriBute.pilotId},
+        </if>
+        <if test="distriBute.supercargoId !=null and distriBute.supercargoId !=''">
+            supercargo_id =#{distriBute.supercargoId},
+        </if>
+        <if test="distriBute.vehicleId != null and distriBute.vehicleId !=''">
+            vehicle_id = #{distriBute.vehicleId},
+        </if>
+        <if test="distriBute.schedulingUser != null and distriBute.schedulingUser !=''">
+            scheduling_user = #{distriBute.schedulingUser},
+        </if>
+        <if test="distriBute.schedulingDate != null and distriBute.schedulingDate !=''">
+            scheduling_date = #{distriBute.schedulingDate},
+        </if>
+
+        <if test="distriBute.trailerId !=null and distriBute.trailerId !=''">
+            trailer_id =#{distriBute.trailerId},
+        </if>
+        status = 1,node_id = 1
+        <where>
+            id = #{distriBute.id}
+            <if test="isScope">
+                and
+                (
+                shipper_id in
+                <foreach collection="ownerIds" item="item" index="index"
+                         open="(" separator="," close=")">#{item}
+                </foreach>
+                or receiving_id in
+                <foreach collection="ownerIds" item="item" index="index"
+                         open="(" separator="," close=")">#{item}
+                </foreach>
+                or shipment_id in
+                <foreach collection="ownerIds" item="item" index="index"
+                         open="(" separator="," close=")">#{item}
+                </foreach>
+                )
+            </if>
+        </where>
+
+    </update>
+    <update id="deleteWaybillOrder">
+        update waybill_order set is_deleted=1 where id =#{id}
+        <if test="isScope">
+            and
+            (
+            shipper_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or receiving_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or shipment_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            )
+        </if>
+    </update>
+    <select id="countWaybillOrder" resultType="java.lang.Integer">
+    select count(*) from waybill_order where is_deleted=0 and pilot_id=#{pilotId}
+  </select>
+    <select id="selectOrderList" resultMap="DTOResultMap">
+        select t1.id,
+        t1.consignment_id,
+      consign.consign_code,
+        t1.order_code,
+        t1.pilot_id,
+        pilot.name pilotName,
+        t1.supercargo_id,
+        supercargo.name supercargoName,
+        t1.vehicle_id,
+        vehicle.vehicle_code vehicleCode,
+        t1.trailer_id,
+        trailer.vehicle_code trailerCode,
+        t1.shipper_id,
+        shipper.owner_name shipperName,
+        t1.receiving_id,
+        receiving.owner_name receivingName,
+        t1.shipment_id,
+        t1.is_city,
+        shipment.owner_name shipmentName,
+        t1.status,
+        t1.shipment_arrive
+        from waybill_order t1
+        left join waybill_user pilot on t1.pilot_id = pilot.id and pilot.is_deleted = 0
+        left join waybill_user supercargo on t1.supercargo_id = supercargo.id and supercargo.is_deleted = 0
+        left join waybill_vehicle vehicle on t1.vehicle_id = vehicle.id and vehicle.is_deleted = 0
+        left join waybill_vehicle trailer on t1.trailer_id = trailer.id and trailer.is_deleted = 0
+        left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+        left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+        left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+        left join waybill_consign consign on t1.consignment_id = consign.id and consign.is_deleted = 0
+        where t1.is_deleted = 0
+        <if test="orderCode != null">
+            and t1.order_code like #{orderCode}
+        </if>
+        <if test="pilot != null">
+            and pilot.name like #{pilot}
+        </if>
+
+        <if test="owner != null">
+            and shipper.owner_name like #{owner}
+        </if>
+
+        and t1.status in
+        <foreach collection="states" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <if test="loginType != 1">
+            and (t1.pilot_id = #{userId} or t1.supercargo_id = #{userId})
+        </if>
+        <if test="isScope">
+            and
+            (
+            shipper_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or receiving_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or shipment_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            )
+        </if>
+        order by t1.id desc
+        limit #{limit} offset #{offset}
+    </select>
+    <select id="getOrderCountByList" resultType="java.lang.Integer">
+        select count(*)
+        from waybill_order t1
+        left join waybill_user pilot on t1.pilot_id = pilot.id and pilot.is_deleted = 0
+        left join waybill_user supercargo on t1.supercargo_id = supercargo.id and supercargo.is_deleted = 0
+        left join waybill_vehicle vehicle on t1.vehicle_id = vehicle.id and vehicle.is_deleted = 0
+        left join waybill_vehicle trailer on t1.trailer_id = trailer.id and trailer.is_deleted = 0
+        left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+        left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+        left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+        where t1.is_deleted = 0
+        <if test="orderCode != null">
+            and t1.order_code like #{orderCode}
+        </if>
+        <if test="pilot != null">
+            and pilot.name like #{pilot}
+        </if>
+
+        <if test="owner != null">
+            and shipper.owner_name like #{owner}
+        </if>
+
+        and t1.status in
+        <foreach collection="states" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <if test="loginType != 1">
+            and (t1.pilot_id = #{userId} or t1.supercargo_id = #{userId})
+        </if>
+        <if test="isScope">
+            and
+            (
+            shipper_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or receiving_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or shipment_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            )
+        </if>
+    </select>
+    <select id="selectOrderDetail" resultMap="DetailDTOResultMap">
+        select t1.id,
+                t1.consignment_id,
+                consign.consign_code,
+               t1.order_code,
+               t1.status,
+               t1.shipment_start,
+               t1.shipment_stop,
+               t1.is_city,
+               t1.shipment_time,
+               t1.shipment_arrive,
+               t1.attention,
+               t1.measures,
+               t1.remark,
+               t1.created_at,
+               t1.updated_at,
+               t1.node_id,
+               t1.scheduling_date,
+               t1.expediter,
+               t1.expediter_phone,
+               node.name nodeName,
+
+               # 司机
+               t1.pilot_id,
+               pilot.name           pilotName,
+               pilot.phone pilotPhone,
+               pilot.id_card pilotCard,
+
+               # 押运
+               t1.supercargo_id,
+               supercargo.name      supercargoName,
+               supercargo.phone supercargoPhone,
+               supercargo.id_card supercargoCard,
+
+                # 调度
+               t1.scheduling_user,
+               scheduling.name      schedulingUserName,
+
+               # 车辆
+               t1.vehicle_id,
+               vehicle.vehicle_code vehicleCode,
+               vehicle.transport_number vehicleCard,
+
+               # 挂车
+               t1.trailer_id,
+               trailer.vehicle_code trailerCode,
+               trailer.transport_number trailerCard,
+
+               # 发货
+               t1.shipper_id,
+               shipper.owner_name   shipperName,
+               shipper.contact shipperContact,
+               shipper.contact_phone shipperContactPhone,
+               shipper.credit_code shipperCreditCode,
+
+               # 收货
+               t1.receiving_id,
+               receiving.owner_name receivingName,
+               receiving.contact receivingContact,
+               receiving.contact_phone receivingContactPhone,
+               receiving.credit_code receivingCreditCode,
+
+                # 装货
+               t1.expediter_id,
+               expediter.owner_name expediterName,
+               expediter.contact expediterContact,
+               expediter.contact_phone expediterContactPhone,
+               expediter.credit_code expediterCreditCode,
+
+               # 运输
+               t1.shipment_id,
+               shipment.owner_name  shipmentName,
+               shipment.contact shipmentContact,
+               shipment.contact_phone shipmentContactPhone,
+               shipment.credit_code shipmentCreditCode
+
+               # 货物 call
+
+               # 节点 call
+
+
+        from waybill_order t1
+               left join waybill_user pilot on t1.pilot_id = pilot.id and pilot.is_deleted = 0
+               left join waybill_user supercargo on t1.supercargo_id = supercargo.id and supercargo.is_deleted = 0
+               left join waybill_user scheduling on t1.scheduling_user = scheduling.id and scheduling.is_deleted = 0
+               left join waybill_vehicle vehicle on t1.vehicle_id = vehicle.id and vehicle.is_deleted = 0
+               left join waybill_vehicle trailer on t1.trailer_id = trailer.id and trailer.is_deleted = 0
+               left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+               left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+               left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+               left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+               left join waybill_nodes node on t1.node_id = node.id
+               left join waybill_consign consign on t1.consignment_id = consign.id and consign.is_deleted = 0
+        where t1.is_deleted = 0
+        and t1.id = #{orderId}
+    </select>
+    <!--根据订单编号查询订单详情-->
+    <select id="selectOrderDetailByOrderCode" resultMap="DetailDTOResultMap">
+        select t1.id,
+                t1.consignment_id,
+                consign.consign_code,
+               t1.order_code,
+               t1.status,
+               t1.shipment_start,
+               t1.shipment_stop,
+               t1.is_city,
+               t1.shipment_time,
+               t1.shipment_arrive,
+               t1.attention,
+               t1.measures,
+               t1.remark,
+               t1.created_at,
+               t1.updated_at,
+               t1.node_id,
+               t1.scheduling_user,
+               t1.scheduling_date,
+               t1.expediter,
+               t1.expediter_phone,
+               node.name nodeName,
+
+               # 司机
+               t1.pilot_id,
+               pilot.name           pilotName,
+               pilot.phone pilotPhone,
+               pilot.id_card pilotCard,
+
+               # 押运
+               t1.supercargo_id,
+               supercargo.name      supercargoName,
+               supercargo.phone supercargoPhone,
+               supercargo.id_card supercargoCard,
+
+               # 调度
+               t1.scheduling_user,
+               scheduling.name      schedulingUserName,
+
+               # 车辆
+               t1.vehicle_id,
+               vehicle.vehicle_code vehicleCode,
+               vehicle.transport_number vehicleCard,
+
+               # 挂车
+               t1.trailer_id,
+               trailer.vehicle_code trailerCode,
+               trailer.transport_number trailerCard,
+
+               # 发货
+               t1.shipper_id,
+               shipper.owner_name   shipperName,
+               shipper.contact shipperContact,
+               shipper.contact_phone shipperContactPhone,
+               shipper.credit_code shipperCreditCode,
+
+                # 装货
+               t1.expediter_id,
+               expediter.owner_name expediterName,
+               expediter.contact expediterContact,
+               expediter.contact_phone expediterContactPhone,
+               expediter.credit_code expediterCreditCode,
+
+               # 收货
+               t1.receiving_id,
+               receiving.owner_name receivingName,
+               receiving.contact receivingContact,
+               receiving.contact_phone receivingContactPhone,
+               receiving.credit_code receivingCreditCode,
+
+               # 运输
+               t1.shipment_id,
+               shipment.owner_name  shipmentName,
+               shipment.contact shipmentContact,
+               shipment.contact_phone shipmentContactPhone,
+               shipment.credit_code shipmentCreditCode
+
+               # 货物 call
+
+               # 节点 call
+
+
+        from waybill_order t1
+               left join waybill_user pilot on t1.pilot_id = pilot.id and pilot.is_deleted = 0
+               left join waybill_user supercargo on t1.supercargo_id = supercargo.id and supercargo.is_deleted = 0
+               left join waybill_user scheduling on t1.scheduling_user = scheduling.id and scheduling.is_deleted = 0
+               left join waybill_vehicle vehicle on t1.vehicle_id = vehicle.id and vehicle.is_deleted = 0
+               left join waybill_vehicle trailer on t1.trailer_id = trailer.id and trailer.is_deleted = 0
+               left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+               left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+               left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+               left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+               left join waybill_nodes node on t1.node_id = node.id
+               left join waybill_consign consign on t1.consignment_id = consign.id and consign.is_deleted = 0
+        where t1.is_deleted = 0
+        and t1.order_code = #{orderCode}
+    </select>
+    <!--运单审批-->
+    <update id="exaMine" parameterType="com.thundersdata.backend.basic.vo.ExaMineVo">
+        update waybill_order
+        <set>
+            <if test="orderCode != null">
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="pilotId != null">
+                pilot_id = #{pilotId,jdbcType=INTEGER},
+            </if>
+            <if test="supercargoId != null">
+                supercargo_id = #{supercargoId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="nodeId != null">
+                node_id = #{nodeId,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+
+    </update>
+    <!--插入订单表-->
+    <insert id="insertWaybillOrder" parameterType="com.thundersdata.backend.basic.dto.WaybillOrderDTO">
+      insert into waybill_order (
+        order_code,
+        qr_code,
+        shipper_id,
+        receiving_id,
+        expediter_id,
+        shipment_start,
+        shipment_stop,
+        is_city,
+        shipment_time,
+        shipment_arrive,
+        shipment_id,
+        attention,
+        measures,
+        scheduling_user,
+        scheduling_date,
+        expediter,
+        expediter_phone,
+        remark)
+    values (
+        #{orderCode,jdbcType=VARCHAR},
+        #{qrCode,jdbcType=VARCHAR},
+        #{shipperId,jdbcType=INTEGER},
+        #{receivingId,jdbcType=INTEGER},
+        #{expediterId,jdbcType=INTEGER},
+        #{shipmentStart,jdbcType=VARCHAR},
+        #{shipmentStop,jdbcType=VARCHAR},
+        #{isCity,jdbcType=TINYINT},
+        #{shipmentTime,jdbcType=TIMESTAMP},
+        #{shipmentArrive,jdbcType=TIMESTAMP},
+        #{shipmentId,jdbcType=INTEGER},
+        #{attention,jdbcType=LONGVARCHAR},
+        #{measures,jdbcType=LONGVARCHAR},
+        #{schedulingUser,jdbcType=INTEGER},
+        #{schedulingDate,jdbcType=TIMESTAMP},
+        #{expediter,jdbcType=VARCHAR},
+        #{expediterPhone,jdbcType=VARCHAR},
+        #{remark,jdbcType=LONGVARCHAR})
+    </insert>
+    <!--更新订单表-->
+    <update id="updateWaybillOrder" parameterType="com.thundersdata.backend.basic.dto.WaybillOrderDTO">
+        update waybill_order
+        <set>
+            <if test="order.qrCode!=null and order.qrCode!=''">
+                qr_code = #{order.qrCode,jdbcType=VARCHAR},
+            </if>
+            shipper_id = #{order.shipperId,jdbcType=INTEGER},
+            receiving_id = #{order.receivingId,jdbcType=INTEGER},
+            expediter_id = #{order.expediterId,jdbcType=INTEGER},
+            <if test="order.shipmentStart!=null and order.shipmentStart!=''">
+                shipment_start = #{order.shipmentStart,jdbcType=VARCHAR},
+            </if>
+            <if test="order.shipmentStop!=null and order.shipmentStop!=''">
+                shipment_stop = #{order.shipmentStop,jdbcType=VARCHAR},
+            </if>
+            <if test="order.isCity!=null">
+              is_city = #{order.isCity,jdbcType=TINYINT},
+            </if>
+            <if test="order.shipmentTime!=null">
+                shipment_time = #{order.shipmentTime,jdbcType=TIMESTAMP},
+            </if>
+            shipment_id = #{order.shipmentId,jdbcType=INTEGER},
+            <if test="order.shipmentArrive!=null ">
+                shipment_arrive = #{order.shipmentArrive,jdbcType=TIMESTAMP},
+            </if>
+            <if test="order.pilotId!=null and order.pilotId!=''">
+                pilot_id = #{order.pilotId,jdbcType=INTEGER},
+            </if>
+            <if test="order.supercargoId!=null and order.supercargoId!=''">
+                supercargo_id = #{order.supercargoId,jdbcType=INTEGER}
+            </if>
+            <if test="order.attention != null">
+                attention = #{order.attention,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="order.measures != null">
+                measures = #{order.measures,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="order.schedulingUser != null">
+              scheduling_user = #{order.schedulingUser,jdbcType=INTEGER},
+            </if>
+            <if test="order.schedulingDate != null">
+              scheduling_date = #{order.schedulingDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="order.expediter != null and order.expediter!=''">
+              expediter = #{order.expediter,jdbcType=VARCHAR},
+            </if>
+            <if test="order.expediterPhone != null and order.expediterPhone!=''">
+              expediter_phone = #{order.expediterPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="order.remark != null">
+                remark = #{order.remark,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{order.id,jdbcType=INTEGER}
+        <if test="isScope">
+            and
+            (
+            shipper_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or receiving_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            or shipment_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+            )
+        </if>
+    </update>
+    <select id="selectID" resultType="com.thundersdata.backend.basic.vo.ExaMineVo">
+        select  pilot_id as pilotId ,supercargo_id  as supercargoId ,vehicle_id as vehicleId ,trailer_id as trailerId
+         from waybill_order
+         where id = #{id}
+    </select>
+    <!--根据运单id查询线路详情-->
+    <select id="lineDetails" resultType="com.thundersdata.backend.basic.dto.lineDetailsDTO">
+        select
+            wr.name,
+            wr.start_addr startAddr,
+            wr.way,
+            wr.km,
+            wr.stop_addr stopAddr
+        from waybill_order_route wor , waybill_route wr
+        where
+          wor.route_id = wr.id
+            and wor.order_id = #{orderId}
+            and wr.is_deleted = 0
+    </select>
+    <update id="expediter" parameterType="com.thundersdata.backend.basic.model.WaybillOrder">
+        update waybill_order
+        <set>
+            <if test="expediter != null">
+                expediter = #{expediter,jdbcType=VARCHAR},
+            </if>
+            <if test="expediterPhone != null">
+                expediter_phone = #{expediterPhone,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER} and is_deleted = 0 and node_id=2
+    </update>
+    <!--运单补录-->
+    <insert id="waybillSupplement" parameterType="com.thundersdata.backend.basic.dto.waybillSupplementDTO">
+        insert into waybill_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderCode != null">
+                order_code,
+            </if>
+            <if test="qrCode != null">
+                qr_code,
+            </if>
+            <if test="shipperId != null">
+                shipper_id,
+            </if>
+            <if test="receivingId != null">
+                receiving_id,
+            </if>
+            <if test="shipmentStart != null">
+                shipment_start,
+            </if>
+            <if test="shipmentStop != null">
+                shipment_stop,
+            </if>
+            <if test="isCity != null">
+                is_city,
+            </if>
+            <if test="shipmentTime != null">
+                shipment_time,
+            </if>
+            <if test="shipmentArrive != null">
+                shipment_arrive,
+            </if>
+            <if test="shipmentId != null">
+                shipment_id,
+            </if>
+            <if test="pilotId != null">
+                pilot_id,
+            </if>
+            <if test="supercargoId != null">
+                supercargo_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="nodeId != null">
+                node_id,
+            </if>
+            <if test="schedulingUser != null">
+                scheduling_user,
+            </if>
+            <if test="schedulingDate != null">
+                scheduling_date,
+            </if>
+            <if test="expediter != null">
+                expediter,
+            </if>
+            <if test="expediterId != null">
+                expediter_id,
+            </if>
+            <if test="expediterPhone != null">
+                expediter_phone,
+            </if>
+            <if test="attention != null">
+                attention,
+            </if>
+            <if test="measures != null">
+                measures,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="trailerId != null">
+                trailer_id,
+            </if>
+            <if test="vehicleId != null">
+                vehicle_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderCode != null">
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="qrCode != null">
+                #{qrCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shipperId != null">
+                #{shipperId,jdbcType=INTEGER},
+            </if>
+            <if test="receivingId != null">
+                #{receivingId,jdbcType=INTEGER},
+            </if>
+            <if test="shipmentStart != null">
+                #{shipmentStart,jdbcType=VARCHAR},
+            </if>
+            <if test="shipmentStop != null">
+                #{shipmentStop,jdbcType=VARCHAR},
+            </if>
+            <if test="isCity != null">
+                #{is_city,jdbcType=TINYINT},
+            </if>
+            <if test="shipmentTime != null">
+                #{shipmentTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipmentArrive != null">
+                #{shipmentArrive,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipmentId != null">
+                #{shipmentId,jdbcType=INTEGER},
+            </if>
+            <if test="pilotId != null">
+                #{pilotId,jdbcType=INTEGER},
+            </if>
+            <if test="supercargoId != null">
+                #{supercargoId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="nodeId != null">
+                #{nodeId,jdbcType=INTEGER},
+            </if>
+            <if test="schedulingUser != null">
+                #{schedulingUser,jdbcType=INTEGER},
+            </if>
+            <if test="schedulingDate != null">
+                #{schedulingDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expediter != null">
+                #{expediter,jdbcType=VARCHAR},
+            </if>
+            <if test="expediterId != null">
+                #{expediterId,jdbcType=VARCHAR},
+            </if>
+            <if test="expediterPhone != null">
+                #{expediterPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="attention != null">
+                #{attention,jdbcType=VARCHAR},
+            </if>
+            <if test="measures != null">
+                #{measures,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="trailerId != null">
+                #{trailerId,jdbcType=INTEGER},
+            </if>
+            <if test="vehicleId != null">
+                #{vehicleId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+  <insert id="dispatchOrder" parameterType="com.thundersdata.backend.basic.vo.WaybillOrderDispatchVO" keyProperty="id" useGeneratedKeys="true">
+    insert into waybill_order (
+        consignment_id,
+        order_code,
+        qr_code,
+        shipper_id,
+        receiving_id,
+        expediter_id,
+        expediter,
+        expediter_phone,
+        shipment_start,
+        shipment_stop,
+        shipment_time,
+        shipment_arrive,
+        shipment_id,
+        pilot_id,
+        supercargo_id,
+        vehicle_id,
+        trailer_id,
+        scheduling_user,
+        scheduling_date,
+        attention,
+        measures,
+        status,
+        node_id,
+        is_city,
+        remark)
+    values (
+        #{consignmentId,jdbcType=INTEGER},
+        #{orderCode,jdbcType=VARCHAR},
+        #{qrCode,jdbcType=VARCHAR},
+        #{shipperId,jdbcType=INTEGER},
+        #{receivingId,jdbcType=INTEGER},
+        #{expediterId,jdbcType=INTEGER},
+        #{expediter,jdbcType=VARCHAR},
+        #{expediterPhone,jdbcType=VARCHAR},
+        #{shipmentStart,jdbcType=VARCHAR},
+        #{shipmentStop,jdbcType=VARCHAR},
+        #{shipmentTime,jdbcType=TIMESTAMP},
+        #{shipmentArrive,jdbcType=TIMESTAMP},
+        #{shipmentId,jdbcType=INTEGER},
+        #{pilotId,jdbcType=INTEGER},
+        #{supercargoId,jdbcType=INTEGER},
+        #{vehicleId,jdbcType=INTEGER},
+        #{trailerId,jdbcType=INTEGER},
+        #{schedulingUser,jdbcType=INTEGER},
+        #{schedulingDate,jdbcType=TIMESTAMP},
+        #{attention,jdbcType=LONGVARCHAR},
+        #{measures,jdbcType=LONGVARCHAR},
+        #{status,jdbcType=INTEGER},
+        #{nodeId,jdbcType=INTEGER},
+        #{isCity,jdbcType=TINYINT},
+        #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+    <!--电子运单超时预警 -->
+    <select id="ExpiredOrder" parameterType="com.thundersdata.backend.basic.dto.UserExpiredDTO" resultType="com.thundersdata.backend.basic.vo.UserExpiredVO">
+         select  zjb.id as id,
+                 zjb.order_code as name,
+                 zjb.shipment_arrive as employedEndDate
+         from (SELECT *,
+            now() AS `现在`,
+            HOUR( timediff( now(), shipment_arrive) ) AS `jg`  from waybill_order) zjb
+            join waybill_owner wo on zjb.shipper_id = wo.id
+         where zjb.jg >24
+            and zjb.is_deleted = 0
+            and wo.province=#{userExpiredDTO.province}
+            and wo.city = #{userExpiredDTO.city}
+            and wo.county =#{userExpiredDTO.county}
+            and wo.is_deleted =  0
+            and zjb.shipment_arrive  BETWEEN #{userExpiredDTO.startDate} and  #{userExpiredDTO.endDate}
+    </select>
+
+    <!--根据时间段查询电子运单超时预警 -->
+    <select id="HistoryExpiredOrder" parameterType="com.thundersdata.backend.basic.dto.UserExpiredDTO" resultType="com.thundersdata.backend.basic.vo.UserExpiredVO">
+         select  zjb.id as id,
+                 zjb.order_code as name,
+                 zjb.shipment_arrive as employedEndDate
+         from (SELECT *,
+            now() AS `现在`,
+            HOUR( timediff( now(), shipment_arrive) ) AS `jg`  from waybill_order) zjb
+            join waybill_owner wo on zjb.shipper_id = wo.id
+         where zjb.jg >24
+            and zjb.is_deleted = 0
+            and wo.province=#{userExpiredDTO.province}
+            and wo.city = #{userExpiredDTO.city}
+            and wo.county =#{userExpiredDTO.county}
+            and wo.is_deleted =  0
+            and zjb.shipment_arrive  BETWEEN #{userExpiredDTO.startDate} and  #{userExpiredDTO.endDate}
+    </select>
+
+    <!--根据运单id 查询货车id，开始时间，结束时间-->
+    <select id="WaybillTrack" parameterType="String" resultType="com.thundersdata.backend.basic.dto.VehicleTrackDTO">
+        SELECT vehicle_id as vehicleId,
+        created_at as startDate,
+        updated_at  as endDate
+        from waybill_order
+        where id = #{orderId}
+    </select>
+    <select id="selectOrderDetaillonlat" resultType="com.thundersdata.backend.basic.vo.selectOrderDetaillonlatVO" parameterType="com.thundersdata.backend.basic.vo.selectOrderDetaillonlatVO">
+              select
+                t1.order_code as ordercode,
+				t1.shipment_start as shipmentstart,
+				t1.shipment_stop as shipmentstop,
+				t1.shipment_arrive as shipmentarrive,
+               # 车辆
+               vehicle.vehicle_code  as vehiclecode,
+
+               # 发货
+               shipper.owner_name  as  shippername,
+
+               # 收货
+               receiving.owner_name as receivingname,
+
+                # 装货
+               expediter.owner_name as expeditername,
+
+               # 运输
+               shipment.owner_name  as shipmentname,
+
+				#经纬度
+				gps.lon as lon,
+				gps.lat as lat
+        from waybill_order t1
+               left join waybill_vehicle vehicle on t1.vehicle_id = vehicle.id and vehicle.is_deleted = 0
+               left join waybill_vehicle trailer on t1.trailer_id = trailer.id and trailer.is_deleted = 0
+               left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+               left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+               left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+               left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+			   left join waybill_vehicle_gps gps on t1.vehicle_id = gps.vehicle_id and gps.is_deleted =0
+        where t1.is_deleted = 0
+        and t1.order_code = #{ordercode} order by gps.id desc limit 1
+    </select>
+
+
+
+
+</mapper>

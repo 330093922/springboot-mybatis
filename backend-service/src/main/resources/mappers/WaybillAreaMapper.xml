@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillArea" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="area_no" property="areaNo" jdbcType="VARCHAR" />
+    <result column="area_name" property="areaName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="classify" property="classify" jdbcType="VARCHAR" />
+    <result column="input_date" property="inputDate" jdbcType="TIMESTAMP" />
+    <result column="volume" property="volume" jdbcType="INTEGER" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="wide" property="wide" jdbcType="INTEGER" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillArea" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,owner_id, area_no, area_name, type, goods_name, classify, input_date, volume, length, wide,
+    image_url, status, created_at, updated_at, is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <!--装卸详情-->
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_area
+    where id = #{id,jdbcType=INTEGER} and is_deleted = 0
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_area
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillArea" >
+    insert into waybill_area (id, area_no, area_name, 
+      type, goods_name, classify, 
+      input_date, volume, length, 
+      wide, image_url, status, 
+      created_at, updated_at, is_deleted, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{areaNo,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{goodsName,jdbcType=VARCHAR}, #{classify,jdbcType=VARCHAR}, 
+      #{inputDate,jdbcType=TIMESTAMP}, #{volume,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, 
+      #{wide,jdbcType=INTEGER}, #{imageUrl,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillArea" >
+    insert into waybill_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="areaNo != null" >
+        area_no,
+      </if>
+      <if test="areaName != null" >
+        area_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="classify != null" >
+        classify,
+      </if>
+      <if test="inputDate != null" >
+        input_date,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="wide != null" >
+        wide,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="areaNo != null" >
+        #{areaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="classify != null" >
+        #{classify,jdbcType=VARCHAR},
+      </if>
+      <if test="inputDate != null" >
+        #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="wide != null" >
+        #{wide,jdbcType=INTEGER},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"  >
+    update waybill_area
+    <set >
+      <if test="WaybillArea.ownerId != null" >
+        owner_id = #{WaybillArea.ownerId,jdbcType=INTEGER},
+      </if>
+
+      <if test="WaybillArea.areaNo != null" >
+        area_no = #{WaybillArea.areaNo,jdbcType=VARCHAR},
+      </if>
+      <if test="WaybillArea.areaName != null" >
+        area_name = #{WaybillArea.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="WaybillArea.type != null" >
+        type = #{WaybillArea.type,jdbcType=TINYINT},
+      </if>
+      <if test="WaybillArea.goodsName != null" >
+        goods_name = #{WaybillArea.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="WaybillArea.classify != null" >
+        classify = #{WaybillArea.classify,jdbcType=VARCHAR},
+      </if>
+      <if test="WaybillArea.inputDate != null" >
+        input_date = #{WaybillArea.inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="WaybillArea.volume != null" >
+        volume = #{WaybillArea.volume,jdbcType=INTEGER},
+      </if>
+      <if test="WaybillArea.length != null" >
+        length = #{WaybillArea.length,jdbcType=INTEGER},
+      </if>
+      <if test="WaybillArea.wide != null" >
+        wide = #{WaybillArea.wide,jdbcType=INTEGER},
+      </if>
+      <if test="WaybillArea.imageUrl != null" >
+        image_url = #{WaybillArea.imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="WaybillArea.status != null" >
+        status = #{WaybillArea.status,jdbcType=TINYINT},
+      </if>
+      <if test="WaybillArea.createdAt != null" >
+        created_at = #{WaybillArea.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="WaybillArea.updatedAt != null" >
+        updated_at = #{WaybillArea.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="WaybillArea.isDeleted != null" >
+        is_deleted = #{WaybillArea.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="WaybillArea.remark != null" >
+        remark = #{WaybillArea.remark,jdbcType=LONGVARCHAR}
+      </if>
+    </set>
+    <where>
+      id = #{WaybillArea.id,jdbcType=INTEGER}
+    </where>
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillArea" >
+    update waybill_area
+    set area_no = #{areaNo,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      classify = #{classify,jdbcType=VARCHAR},
+      input_date = #{inputDate,jdbcType=TIMESTAMP},
+      volume = #{volume,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      wide = #{wide,jdbcType=INTEGER},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillArea" >
+    update waybill_area
+    set area_no = #{areaNo,jdbcType=VARCHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      classify = #{classify,jdbcType=VARCHAR},
+      input_date = #{inputDate,jdbcType=TIMESTAMP},
+      volume = #{volume,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      wide = #{wide,jdbcType=INTEGER},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--  条件查询数量-->
+  <select id="getCountByCondition" resultType="java.lang.Integer" parameterType="com.thundersdata.backend.basic.vo.WaybillAreaVo">
+    select count(*)
+    FROM
+    waybill_area
+    <where>
+      <if test="waybillAreaVo.areaNo != null and waybillAreaVo.areaNo !='' ">
+        area_no like concat(concat('%',#{waybillAreaVo.areaNo}),'%')
+      </if>
+      <if test="waybillAreaVo.areaName !=null and waybillAreaVo.areaName !=''">
+        or   area_name like  concat(concat('%',#{waybillAreaVo.areaName}),'%')
+      </if>
+      <if test="waybillAreaVo.goodsName !=null and waybillAreaVo.goodsName !=''">
+        or  goods_name like  concat(concat('%',#{waybillAreaVo.goodsName} ),'%')
+      </if>
+      <if test="waybillAreaVo.isScope">
+        and owner_id in
+        <foreach collection="waybillAreaVo.dataList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+      </if>
+      and  is_deleted = 0;
+    </where>
+  </select>
+  <!--列表查询-->
+  <select id="selectWaybillOwnerLike"   resultMap="BaseResultMap">
+    select id,owner_id ,area_no,area_name,type,goods_name,status,remark
+    from waybill_area
+    <where>
+      <if test="waybillAreaVo.areaNo != null and waybillAreaVo.areaNo !='' ">
+        area_no like concat(concat('%',#{waybillAreaVo.areaNo}),'%')
+      </if>
+      <if test="waybillAreaVo.areaName !=null and waybillAreaVo.areaName !=''">
+        and   area_name like  concat(concat('%',#{waybillAreaVo.areaName}),'%')
+      </if>
+      <if test="waybillAreaVo.goodsName !=null and waybillAreaVo.goodsName !=''">
+        and  goods_name like  concat(concat('%',#{waybillAreaVo.goodsName} ),'%')
+      </if>
+      <if test="waybillAreaVo.isScope">
+      and owner_id in
+      <foreach collection="waybillAreaVo.dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+      and is_deleted = 0 ORDER  by id desc
+    </where>
+    limit #{waybillAreaVo.pageSize} offset #{waybillAreaVo.page}
+  </select>
+<!--删除-->
+  <update id="deleteId" parameterType="List">
+        update  waybill_area
+        set is_deleted = 1
+        <where>
+          id in
+          <foreach collection="list" open="(" separator="," close=")" item="item">
+             #{item.id}
+          </foreach>
+          <if test="isScope">
+            and owner_id in
+            <foreach collection="dataList" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+          </if>
+        </where>
+    </update>
+<!--下拉框-->
+  <select id="dropDown" parameterType="java.lang.String"  resultType="com.thundersdata.backend.basic.dto.WaybillAreaDTO">
+    select id  as id ,owner_id as ownerId ,area_no as areaNo  ,area_name as  areaName ,type  as type,
+    goods_name as goodsName ,classify as classify ,input_date as inputDate,
+    volume as volume, length as length,wide as wide,image_url as imageUrl
+    from waybill_area
+    <where>
+      <if test="areaNo!=null and areaNo != ''">
+        area_no like concat(concat('%',#{areaNo}),'%')
+      </if>
+      and is_deleted = 0 limit 20
+    </where>
+  </select>
+
+
+  <!--数据范围判断下拉框-->
+  <select id="dataDropDown" parameterType="java.lang.String"  resultType="com.thundersdata.backend.basic.dto.WaybillAreaDTO">
+    select id  as id ,owner_id as ownerId ,area_no as areaNo  ,area_name as  areaName ,type  as type,
+    goods_name as goodsName ,classify as classify ,input_date as inputDate,
+    volume as volume, length as length,wide as wide,image_url as imageUrl
+    from waybill_area
+    <where>
+      <if test="areaNo!=null and areaNo != ''">
+        area_no like concat(concat('%',#{areaNo}),'%')
+      </if>
+      <if test="isScope">
+        and owner_id in
+        <foreach collection="dataList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+      </if>
+      and is_deleted = 0 limit 20
+    </where>
+  </select>
+
+</mapper>

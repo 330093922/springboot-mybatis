@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillUserMapper">
+    <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner_id" property="ownerId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="card_type" property="cardType" jdbcType="INTEGER"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="addr_place" property="addrPlace" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="employed_the" property="employedThe" jdbcType="VARCHAR"/>
+        <result column="employed_end_date" property="employedEndDate" jdbcType="DATE"/>
+        <result column="native_place" property="nativePlace" jdbcType="VARCHAR"/>
+        <result column="photo_url" property="photoUrl" jdbcType="VARCHAR"/>
+        <result column="review_status" property="reviewStatus" jdbcType="INTEGER"/>
+        <result column="flag" property="flag" jdbcType="INTEGER"/>
+        <result column="join_time" property="joinTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="login_type" property="loginType" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+    </resultMap>
+    <resultMap id="BaseResultMapDTO" type="com.thundersdata.backend.basic.dto.WaybillUserDTO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="owner_id" property="ownerId" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="birthday" property="birthday" jdbcType="DATE"/>
+        <result column="card_type" property="cardType" jdbcType="INTEGER"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="addr_place" property="addrPlace" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="employed_the" property="employedThe" jdbcType="VARCHAR"/>
+        <result column="employed_end_date" property="employedEndDate" jdbcType="DATE"/>
+        <result column="native_place" property="nativePlace" jdbcType="VARCHAR"/>
+        <result column="photo_url" property="photoUrl" jdbcType="VARCHAR"/>
+        <result column="review_status" property="reviewStatus" jdbcType="INTEGER"/>
+        <result column="flag" property="flag" jdbcType="INTEGER"/>
+        <result column="join_time" property="joinTime" jdbcType="TIMESTAMP"/>
+        <result column="end_time" property="endTime" jdbcType="TIMESTAMP"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="login_type" property="loginType" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="is_deleted" property="isDeleted" jdbcType="TINYINT"/>
+        <result column="owner_name" property="owerName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillUser" extends="BaseResultMap">
+        <result column="feature" property="feature" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <resultMap id="BaseResultMapDictUser" type="com.thundersdata.backend.basic.dto.WayBillUserDictDto">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="card_type" property="cardType" jdbcType="INTEGER"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, owner_id, name, type, sex, age, birthday, card_type, id_card, phone, addr_place, 
+    address, native_place, photo_url, review_status, flag, join_time, end_time, username, 
+    password, token, login_type, status, created_at, updated_at, is_deleted
+  </sql>
+    <sql id="Blob_Column_List">
+    feature
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from waybill_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from waybill_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+    insert into waybill_user (id, owner_id, name, 
+      type, sex, age, birthday, 
+      card_type, id_card, phone, 
+      addr_place, address, native_place, 
+      photo_url, review_status, flag, 
+      join_time, end_time, username, 
+      password, token, login_type, 
+      status, created_at, updated_at, 
+      is_deleted, feature)
+    values (#{id,jdbcType=INTEGER}, #{ownerId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, 
+      #{cardType,jdbcType=INTEGER}, #{idCard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{addrPlace,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, 
+      #{photoUrl,jdbcType=VARCHAR}, #{reviewStatus,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}, 
+      #{joinTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{loginType,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=TINYINT}, #{feature,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+        insert into waybill_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ownerId != null">
+                owner_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="cardType != null">
+                card_type,
+            </if>
+            <if test="idCard != null">
+                id_card,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="addrPlace != null">
+                addr_place,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="employedThe != null">
+                employed_the,
+            </if>
+            <if test="employedEndDate != null">
+                employed_end_date,
+            </if>
+            <if test="nativePlace != null">
+                native_place,
+            </if>
+            <if test="photoUrl != null">
+                photo_url,
+            </if>
+            <if test="reviewStatus != null">
+                review_status,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="joinTime != null">
+                join_time,
+            </if>
+            <if test="endTime != null">
+                end_time,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="loginType != null">
+                login_type,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="feature != null">
+                feature,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="ownerId != null">
+                #{ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="cardType != null">
+                #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addrPlace != null">
+                #{addrPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="employedThe != null">
+                #{employedThe,jdbcType=VARCHAR},
+            </if>
+            <if test="employedEndDate != null">
+                #{employedEndDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nativePlace != null">
+                #{nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="photoUrl != null">
+                #{photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewStatus != null">
+                #{reviewStatus,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="joinTime != null">
+                #{joinTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="loginType != null">
+                #{loginType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="feature != null">
+                #{feature,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+        update waybill_user
+        <set>
+            <if test="ownerId != null">
+                owner_id = #{ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="cardType != null">
+                card_type = #{cardType,jdbcType=INTEGER},
+            </if>
+            <if test="idCard != null">
+                id_card = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addrPlace != null">
+                addr_place = #{addrPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="nativePlace != null">
+                native_place = #{nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="photoUrl != null">
+                photo_url = #{photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="reviewStatus != null">
+                review_status = #{reviewStatus,jdbcType=INTEGER},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="joinTime != null">
+                join_time = #{joinTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endTime != null">
+                end_time = #{endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                token = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="loginType != null">
+                login_type = #{loginType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="feature != null">
+                feature = #{feature,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="state !=null ">
+                state = #{state,jdbcType=TINYINT}
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+    update waybill_user
+    set owner_id = #{ownerId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      card_type = #{cardType,jdbcType=INTEGER},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      addr_place = #{addrPlace,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      photo_url = #{photoUrl,jdbcType=VARCHAR},
+      review_status = #{reviewStatus,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      login_type = #{loginType,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      feature = #{feature,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+    update waybill_user
+    set owner_id = #{ownerId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      card_type = #{cardType,jdbcType=INTEGER},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      addr_place = #{addrPlace,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      photo_url = #{photoUrl,jdbcType=VARCHAR},
+      review_status = #{reviewStatus,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      join_time = #{joinTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      login_type = #{loginType,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <select id="selectAllWaybillUser" resultMap="BaseResultMapDTO">
+        select a.id,
+        a.owner_id,
+        a.name,
+        a.type,
+        a.sex,
+        a.age,
+        a.birthday,
+        a.card_type,
+        a.id_card,
+        a.phone,
+        a.addr_place,
+        a.address,
+        a.native_place,
+        a.photo_url,
+        a.review_status,
+        a.flag,
+        a.join_time,
+        a.end_time,
+        a.username,
+        a.password,
+        a.token,
+        a.login_type,
+        a.status,
+        a.created_at,
+        a.updated_at,
+        a.is_deleted,
+        b.owner_name
+        from waybill_user a
+        left join waybill_owner b on a.owner_id = b.id
+        where a.is_deleted = 0
+        <if test="name!=null and name!=''">
+            and a.name like #{name}
+        </if>
+        <if test="idCard!=null and idCard!=''">
+            and a.id_card like #{idCard}
+        </if>
+        <if test="phone and phone!=''">
+            and a.phone like #{phone}
+        </if>
+        <if test="isScope">
+            and owner_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+        </if>
+        order by a.id desc
+        limit #{limit} offset #{offset}
+    </select>
+
+    <delete id="deleteWaybillUser" parameterType="list">
+        delete from waybill_user
+        where id in
+        <foreach collection="waybillUserList" item="item" open="(" close=")" separator=",">
+            #{item.id}
+        </foreach>
+        <if test="isScope">
+            and owner_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+        </if>
+    </delete>
+
+    <select id="selectAllList" resultMap="BaseResultMapDictUser">
+        select name ,id ,phone,type as 'type',id_card,card_type from waybill_user where is_deleted=0 and login_type=0
+        and state=0
+        <if test="name!=null and name !=''">
+            and name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="phone!=null and phone !=''">
+            and phone like CONCAT('%',#{phone},'%')
+        </if>
+        <if test="idCard!=null and idCard !=''">
+            and id_card like CONCAT('%',#{idCard},'%')
+        </if>
+        limit 20
+    </select>
+
+    <select id="getWaybillUserByPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from waybill_user
+        where is_deleted = 0
+        and username = #{username}
+        and password = #{password}
+    </select>
+
+    <select id="getWaybillUserByToken" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from waybill_user
+        where token = #{token}
+    </select>
+
+    <!--司机和押运员状态修改-->
+    <update id="stateModification" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+        update waybill_user
+        set
+        <if test="state != null">
+            state = #{state,jdbcType=INTEGER}
+        </if>
+        <where>
+            id = #{id}
+            <if test="sex !=null">
+                or id = #{sex}
+            </if>
+        </where>
+    </update>
+
+    <select id="selectWaybillUser" resultMap="BaseResultMapDTO">
+    select a.id,
+           a.owner_id,
+           a.name,
+           a.type,
+           a.sex,
+           a.age,
+           a.birthday,
+           a.card_type,
+           a.id_card,
+           a.phone,
+           a.addr_place,
+           a.address,
+           a.employed_the,
+           a.employed_end_date,
+           a.native_place,
+           a.photo_url,
+           a.review_status,
+           a.flag,
+           a.join_time,
+           a.end_time,
+           a.username,
+           a.password,
+           a.token,
+           a.login_type,
+           a.status,
+           a.created_at,
+           a.updated_at,
+           a.is_deleted,
+           b.owner_name
+    from waybill_user a
+           left join waybill_owner b on a.owner_id = b.id
+    where a.is_deleted = 0
+      and a.id =#{id}
+  </select>
+    <select id="countWaybillUser" resultType="java.lang.Integer">
+        select count(*) from waybill_user where is_deleted = 0
+        <if test="name != null">
+            and name like #{name}
+        </if>
+        <if test="idCard != null">
+            and id_card like #{idCard}
+        </if>
+        <if test="phone != null">
+            and phone like #{phone}
+        </if>
+        <if test="isScope">
+            and owner_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+        </if>
+    </select>
+
+    <update id="updateWaybillUserStatus" parameterType="java.lang.Integer">
+    update waybill_user
+    set status = ABS(status-1)
+    where id = #{id}
+    </update>
+    <update id="updateStates">
+        update waybill_user
+        set state = 0
+        where id = #{pilotId} or id = #{supercargoId}
+    </update>
+    <!--企业id绑定用户-->
+    <insert id="EnterpriseUuser" parameterType="com.thundersdata.backend.basic.model.WaybillUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO waybill_user(owner_id,username,password,login_type,phone,name)
+        SELECT #{ownerId},#{username},#{password},#{loginType},#{phone},#{name} FROM DUAL WHERE NOT EXISTS(SELECT *
+        FROM waybill_user WHERE username = #{username})
+    </insert>
+    <!--查询是否有相同手机号码-->
+    <select id="selectByPhone" resultType="string">
+        select id from waybill_user where is_deleted = 0 and phone = #{phone}
+    </select>
+    <!--查询是否有相同账户-->
+    <select id="selectByUsername" resultType="string">
+        select id from waybill_user where is_deleted = 0 and  username = #{username}
+    </select>
+    <update id="updateUser" parameterType="com.thundersdata.backend.basic.model.WaybillUser">
+        update waybill_user
+        <set>
+            <if test="waybillUser.ownerId != null">
+                owner_id = #{waybillUser.ownerId,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.name != null">
+                name = #{waybillUser.name,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.type != null">
+                type = #{waybillUser.type,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.sex != null">
+                sex = #{waybillUser.sex,jdbcType=INTEGER},
+            </if>
+            <if test="waybillUser.age != null">
+                age = #{waybillUser.age,jdbcType=INTEGER},
+            </if>
+            <if test="waybillUser.birthday != null">
+                birthday = #{waybillUser.birthday,jdbcType=DATE},
+            </if>
+            <if test="waybillUser.cardType != null">
+                card_type = #{waybillUser.cardType,jdbcType=INTEGER},
+            </if>
+            <if test="waybillUser.idCard != null">
+                id_card = #{waybillUser.idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.phone != null">
+                phone = #{waybillUser.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.addrPlace != null">
+                addr_place = #{waybillUser.addrPlace,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.address != null">
+                address = #{waybillUser.address,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.nativePlace != null">
+                native_place = #{waybillUser.nativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.photoUrl != null">
+                photo_url = #{waybillUser.photoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.reviewStatus != null">
+                review_status = #{waybillUser.reviewStatus,jdbcType=INTEGER},
+            </if>
+            <if test="waybillUser.flag != null">
+                flag = #{waybillUser.flag,jdbcType=INTEGER},
+            </if>
+            <if test="waybillUser.joinTime != null">
+                join_time = #{waybillUser.joinTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="waybillUser.endTime != null">
+                end_time = #{waybillUser.endTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="waybillUser.username != null">
+                username = #{waybillUser.username,jdbcType=VARCHAR},
+            </if>
+            <if test="waybillUser.status != null">
+                status = #{waybillUser.status,jdbcType=TINYINT},
+            </if>
+            <if test="waybillUser.createdAt != null">
+                created_at = #{waybillUser.createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="waybillUser.updatedAt != null">
+                updated_at = #{waybillUser.updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="waybillUser.feature != null">
+                feature = #{waybillUser.feature,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="waybillUser.state !=null ">
+                state = #{waybillUser.state,jdbcType=TINYINT}
+            </if>
+        </set>
+        where id = #{waybillUser.id,jdbcType=INTEGER} and is_deleted=0
+        <if test="isScope">
+            and owner_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+        </if>
+    </update>
+    <select id="selectDropList" resultMap="BaseResultMapDictUser">
+        select name ,id ,phone,type as 'type',id_card,card_type from waybill_user where is_deleted=0 and login_type=0
+        and state=0
+        <if test="name!=null and name !=''">
+            and name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="phone!=null and phone !=''">
+            and phone like CONCAT('%',#{phone},'%')
+        </if>
+        <if test="idCard!=null and idCard !=''">
+            and id_card like CONCAT('%',#{idCard},'%')
+        </if>
+        <if test="isScope">
+            and owner_id in
+            <foreach collection="ownerIds" item="item" index="index"
+                     open="(" separator="," close=")">#{item}
+            </foreach>
+        </if>
+        limit 20
+    </select>
+
+    <update id="resetPassword">
+        update waybill_user set password = 'e10adc3949ba59abbe56e057f20f883e'
+        where is_deleted = 0
+        and owner_id in
+        <foreach collection="personList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+    </update>
+    <update id="updateWaybillUserByloginType">
+    update waybill_user
+    set login_type = ABS(login_type-1)
+    where id = #{userId}
+    </update>
+    <!--查询从业资格证过期人员    &lt;转义<  -->
+    <select id="ExpiredUser"  resultType="com.thundersdata.backend.basic.vo.UserExpiredVO">
+        select u.id as id,
+               u.owner_id as ownerId,
+               u.name as name,
+               u.employed_end_date as employedEndDate
+        from waybill_user u JOIN waybill_owner o on u.owner_id = o.id
+        where  (o.province = #{userExpiredDTO.province}
+                and o.city = #{userExpiredDTO.city}
+                and o.county = #{userExpiredDTO.county}
+                and o.is_deleted = 0)
+                and  u.employed_end_date BETWEEN #{userExpiredDTO.startDate} and #{userExpiredDTO.endDate}
+                and u.is_deleted = 0
+
+    </select>
+    <!--查询从业资格证过期人员 时间段-->
+    <select id="HistoryExpiredUser"  parameterType="com.thundersdata.backend.basic.dto.UserExpiredDTO" resultType="com.thundersdata.backend.basic.vo.UserHistogramVO">
+    select count(*) as count,
+        u.employed_end_date as employedEndDate
+        from waybill_user u JOIN waybill_owner o on u.owner_id = o.id
+        where
+            (o.province = #{userExpiredDTO.province}
+            and o.city = #{userExpiredDTO.city}
+            and o.county = #{userExpiredDTO.county}
+            and o.is_deleted = 0)
+            and  u.employed_end_date BETWEEN #{userExpiredDTO.startDate} and #{userExpiredDTO.endDate}
+            and u.is_deleted = 0
+             GROUP BY employedEndDate;
+    </select>
+</mapper>

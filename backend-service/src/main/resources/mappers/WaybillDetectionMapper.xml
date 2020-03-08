@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillDetectionMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillDetection" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="DTOBaseResultMap" type="com.thundersdata.backend.basic.dto.WaybillDetectionDTO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="DTODictBaseResultMap" type="com.thundersdata.backend.basic.dto.WaybillDetectionDictDTO">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="project" property="project" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillDetectionWithBLOBs" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, time, project, created_at, updated_at, is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    content, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_detection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_detection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillDetectionWithBLOBs" >
+    insert into waybill_detection (id, type, time, 
+      project, created_at, updated_at, 
+      is_deleted, content, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{project,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=TINYINT}, #{content,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillDetectionWithBLOBs" >
+    insert into waybill_detection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="project != null" >
+        project,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null" >
+        #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillDetectionWithBLOBs" >
+    update waybill_detection
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="project != null" >
+        project = #{project,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillDetectionWithBLOBs" >
+    update waybill_detection
+    set type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      project = #{project,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      content = #{content,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillDetection" >
+    update waybill_detection
+    set type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      project = #{project,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--查询自检内容管理总数-->
+  <select id="getCountByDetection" resultType="java.lang.Integer">
+    select count(*)
+    from waybill_detection where is_deleted = 0
+    <if test="type != null and type != ''">
+      and type like CONCAT('%',#{type},'%')
+    </if>
+    <if test="project != null and project != ''">
+      and project like CONCAT('%',#{project},'%')
+    </if>
+    <if test="content != null and content != ''">
+      and content like CONCAT('%',#{content},'%')
+    </if>
+  </select>
+  <!--查询自检内容管理分页-->
+  <select id="selectAllDetection" resultMap="DTOBaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_detection where is_deleted = 0
+    <if test="type != null and type != ''">
+      and type like CONCAT('%',#{type},'%')
+    </if>
+    <if test="project != null and project != ''">
+      and project like CONCAT('%',#{project},'%')
+    </if>
+    <if test="content != null and content != ''">
+      and content like CONCAT('%',#{content},'%')
+    </if>
+    order by id desc
+    limit #{limit} offset #{offset}
+  </select>
+  <update id="deleteDetection" parameterType="list">
+    update waybill_detection set is_deleted=1 where id in
+    <foreach collection="waybillDetectionList" item="item" open="(" close=")" separator=",">
+      #{item.id}
+    </foreach>
+  </update>
+  <select id="dropList" resultMap="DTODictBaseResultMap">
+    select id,type,project,content,time
+    from waybill_detection where is_deleted = 0
+    <if test="type != null and type != ''">
+      and type like CONCAT('%',#{type},'%')
+    </if>
+    <if test="project != null and project != ''">
+      and project like CONCAT('%',#{project},'%')
+    </if>
+    <if test="content != null and content != ''">
+      and content like CONCAT('%',#{content},'%')
+    </if>
+    order by id desc
+    limit 20
+  </select>
+  <select id="getDetail" resultMap="DTOBaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_detection where is_deleted = 0 and id =#{id}
+  </select>
+</mapper>

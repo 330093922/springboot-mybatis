@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillConsignGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillConsignGoods" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
+    <result column="consign_id" property="consignId" jdbcType="INTEGER" />
+    <result column="surplus_no" property="surplusNo" jdbcType="INTEGER" />
+    <result column="total_no" property="totalNo" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillConsignGoods" extends="BaseResultMap" >
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goods_id, consign_id, surplus_no, total_no, created_at, updated_at, is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_consign_goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getSumSurplusNoByConsignId" resultType="java.lang.Integer">
+    select
+    SUM(surplus_no)
+    from waybill_consign_goods
+    where consign_id= #{consignGoodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_consign_goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByConsignId" parameterType="java.lang.Integer">
+    delete from waybill_consign_goods
+    where consign_id = #{consignId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillConsignGoods" >
+    insert into waybill_consign_goods (id, goods_id, consign_id, 
+      surplus_no, total_no, created_at, 
+      updated_at, is_deleted, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{goodsId,jdbcType=VARCHAR}, #{consignId,jdbcType=INTEGER}, 
+      #{surplusNo,jdbcType=INTEGER}, #{totalNo,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillConsignGoods" >
+    insert into waybill_consign_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="consignId != null" >
+        consign_id,
+      </if>
+      <if test="surplusNo != null" >
+        surplus_no,
+      </if>
+      <if test="totalNo != null" >
+        total_no,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignId != null" >
+        #{consignId,jdbcType=INTEGER},
+      </if>
+      <if test="surplusNo != null" >
+        #{surplusNo,jdbcType=INTEGER},
+      </if>
+      <if test="totalNo != null" >
+        #{totalNo,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="arraylist">
+    insert into waybill_consign_goods
+    ( goods_id, consign_id,
+    surplus_no, total_no, remark)
+    VALUES
+    <foreach collection="list" item="consignGoods" index="index" separator=",">
+    ( #{consignGoods.goodsId,jdbcType=INTEGER},
+    #{consignGoods.consignId,jdbcType=INTEGER},
+     #{consignGoods.totalNo,jdbcType=INTEGER},
+     #{consignGoods.surplusNo,jdbcType=INTEGER},
+    #{consignGoods.remark,jdbcType=LONGVARCHAR})
+    </foreach>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillConsignGoods" >
+    update waybill_consign_goods
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="consignId != null" >
+        consign_id = #{consignId,jdbcType=INTEGER},
+      </if>
+      <if test="surplusNo != null" >
+        surplus_no = #{surplusNo,jdbcType=INTEGER},
+      </if>
+      <if test="totalNo != null" >
+        total_no = #{totalNo,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillConsignGoods" >
+    update waybill_consign_goods
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
+      consign_id = #{consignId,jdbcType=INTEGER},
+      surplus_no = #{surplusNo,jdbcType=INTEGER},
+      total_no = #{totalNo,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillConsignGoods" >
+    update waybill_consign_goods
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
+      consign_id = #{consignId,jdbcType=INTEGER},
+      surplus_no = #{surplusNo,jdbcType=INTEGER},
+      total_no = #{totalNo,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

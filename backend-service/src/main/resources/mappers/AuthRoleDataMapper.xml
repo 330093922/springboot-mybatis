@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.AuthRoleDataMapper">
+    <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.AuthRoleData">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="scope" property="scope" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="data_type" property="dataType" jdbcType="INTEGER"/>
+        <result column="data_id" property="dataId" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, scope, role_id, data_type, data_id, created_at, updated_at, deleted
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_role_data
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auth_role_data
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByRole">
+    delete from auth_role_data
+    where role_id = #{roleId}
+    </delete>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.AuthRoleData">
+    insert into auth_role_data (id, scope, role_id, 
+      data_type, data_id, created_at, 
+      updated_at, deleted)
+    values (#{id,jdbcType=INTEGER}, #{scope,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
+      #{dataType,jdbcType=INTEGER}, #{dataId,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.AuthRoleData">
+        insert into auth_role_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="scope != null">
+                scope,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="dataType != null">
+                data_type,
+            </if>
+            <if test="dataId != null">
+                data_id,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="scope != null">
+                #{scope,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="dataType != null">
+                #{dataType,jdbcType=INTEGER},
+            </if>
+            <if test="dataId != null">
+                #{dataId,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.AuthRoleData">
+        update auth_role_data
+        <set>
+            <if test="scope != null">
+                scope = #{scope,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="dataType != null">
+                data_type = #{dataType,jdbcType=INTEGER},
+            </if>
+            <if test="dataId != null">
+                data_id = #{dataId,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.AuthRoleData">
+    update auth_role_data
+    set scope = #{scope,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER},
+      data_type = #{dataType,jdbcType=INTEGER},
+      data_id = #{dataId,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectByRole" resultType="com.thundersdata.backend.basic.dto.AuthRoleDataDTO">
+    select t1.id,
+           role_id   roleId,
+           data_type dataType,
+           data_id   dataId,
+           wo.id     ownerId,
+           owner_type ownerType,
+           owner_name ownerName,
+           owner_jc ownerJc,
+           register_capital registerCapital,
+           register_time registerTime,
+           area,
+           person_num personNum,
+           icbc_code icbcCode,
+           credit_code creditCode,
+           owner_addr ownerAddr,
+           register_addr registerAddr,
+           mgr_code mgrCode,
+           register_code registerCode,
+           mgr_area mgrArea,
+           state,
+           contact,
+           contact_phone contactPhone,
+           govern_code governCode,
+           important_level importantLevel,
+           is_important_chemical isImportantChemical,
+           is_important_crafts isImportantCrafts,
+           owner_zt ownerZt,
+           owner_zt_msg ownerZtMsg,
+           owner_nature ownerNature,
+           corp_name corpName,
+           corp_card corpCard,
+           corp_card_number corpCardNumber,
+           corp_phone corpPhone,
+           corp_photo corpPhoto,
+           industry,
+           lon,
+           lat,
+           business_level_count businessLevelCount,
+           business_technology businessTechnology,
+           business_goods businessGoods,
+           nonnative
+    from auth_role_data t1
+           left join waybill_owner wo on wo.id = t1.data_id and wo.is_deleted = 0
+    where deleted = 0
+      and role_id = #{roleId}
+      and data_type = #{dataType}
+  </select>
+
+    <insert id="replaceIntoByRole">
+        replace into auth_role_data (role_id, data_type, data_id)
+        values
+        <foreach collection="dataList" item="item" index="index" separator=",">
+            (
+            #{roleId},
+            #{dataType},
+            #{item}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectByUser" resultType="java.lang.Integer">
+        select owner_id
+        from waybill_user
+        where is_deleted = 0
+        and id = #{userId}
+
+        <if test="isUni == true">
+            union
+
+            select distinct data_id
+            from auth_role_data
+            where deleted = 0
+            and role_id in
+            <foreach collection="roleIds" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+    <!--批量插入-->
+    <insert id="BatchInsertion" parameterType="list">
+        insert into auth_role_data(role_id,data_type,data_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            ( #{item.roleId},#{item.dataType},#{item.dataId} )
+        </foreach>
+
+    </insert>
+
+
+</mapper>

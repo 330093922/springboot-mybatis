@@ -1,0 +1,776 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillOwnerMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillOwner" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="owner_type" property="ownerType" jdbcType="VARCHAR" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="owner_jc" property="ownerJc" jdbcType="VARCHAR" />
+    <result column="register_capital" property="registerCapital" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+    <result column="person_num" property="personNum" jdbcType="VARCHAR" />
+    <result column="icbc_code" property="icbcCode" jdbcType="VARCHAR" />
+    <result column="credit_code" property="creditCode" jdbcType="VARCHAR" />
+    <result column="owner_addr" property="ownerAddr" jdbcType="VARCHAR" />
+    <result column="register_addr" property="registerAddr" jdbcType="VARCHAR" />
+    <result column="mgr_code" property="mgrCode" jdbcType="VARCHAR" />
+    <result column="register_code" property="registerCode" jdbcType="VARCHAR" />
+    <result column="mgr_area" property="mgrArea" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="govern_code" property="governCode" jdbcType="VARCHAR" />
+    <result column="important_level" property="importantLevel" jdbcType="INTEGER" />
+    <result column="is_important_chemical" property="isImportantChemical" jdbcType="INTEGER" />
+    <result column="is_important_crafts" property="isImportantCrafts" jdbcType="INTEGER" />
+    <result column="owner_zt" property="ownerZt" jdbcType="INTEGER" />
+    <result column="owner_zt_msg" property="ownerZtMsg" jdbcType="VARCHAR" />
+    <result column="owner_nature" property="ownerNature" jdbcType="INTEGER" />
+    <result column="corp_name" property="corpName" jdbcType="VARCHAR" />
+    <result column="corp_card" property="corpCard" jdbcType="INTEGER" />
+    <result column="corp_card_number" property="corpCardNumber" jdbcType="VARCHAR" />
+    <result column="corp_phone" property="corpPhone" jdbcType="VARCHAR" />
+    <result column="corp_photo" property="corpPhoto" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="INTEGER" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="business_level_count" property="businessLevelCount" jdbcType="VARCHAR" />
+    <result column="business_technology" property="businessTechnology" jdbcType="VARCHAR" />
+    <result column="business_goods" property="businessGoods" jdbcType="VARCHAR" />
+    <result column="nonnative" property="nonnative" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="govern_area" property="governArea" jdbcType="VARCHAR" />
+    <result column="credit_end_date" property="creditEndDate" jdbcType="TIMESTAMP" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="county" property="county" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="WaybillOwnerDetailsDTOMap" type="com.thundersdata.backend.basic.dto.WaybillOwnerDetailsDTO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="owner_type" property="ownerType" jdbcType="VARCHAR" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="owner_jc" property="ownerJc" jdbcType="VARCHAR" />
+    <result column="register_capital" property="registerCapital" jdbcType="VARCHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="area" property="area" jdbcType="DOUBLE" />
+    <result column="person_num" property="personNum" jdbcType="VARCHAR" />
+    <result column="icbc_code" property="icbcCode" jdbcType="VARCHAR" />
+    <result column="credit_code" property="creditCode" jdbcType="VARCHAR" />
+    <result column="owner_addr" property="ownerAddr" jdbcType="VARCHAR" />
+    <result column="register_addr" property="registerAddr" jdbcType="VARCHAR" />
+    <result column="mgr_code" property="mgrCode" jdbcType="VARCHAR" />
+    <result column="register_code" property="registerCode" jdbcType="VARCHAR" />
+    <result column="mgr_area" property="mgrArea" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+    <result column="govern_code" property="governCode" jdbcType="VARCHAR" />
+    <result column="important_level" property="importantLevel" jdbcType="INTEGER" />
+    <result column="is_important_chemical" property="isImportantChemical" jdbcType="INTEGER" />
+    <result column="is_important_crafts" property="isImportantCrafts" jdbcType="INTEGER" />
+    <result column="owner_zt" property="ownerZt" jdbcType="INTEGER" />
+    <result column="owner_zt_msg" property="ownerZtMsg" jdbcType="VARCHAR" />
+    <result column="owner_nature" property="ownerNature" jdbcType="INTEGER" />
+    <result column="corp_name" property="corpName" jdbcType="VARCHAR" />
+    <result column="corp_card" property="corpCard" jdbcType="INTEGER" />
+    <result column="corp_card_number" property="corpCardNumber" jdbcType="VARCHAR" />
+    <result column="corp_phone" property="corpPhone" jdbcType="VARCHAR" />
+    <result column="corp_photo" property="corpPhoto" jdbcType="VARCHAR" />
+    <result column="industry" property="industry" jdbcType="INTEGER" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="business_level_count" property="businessLevelCount" jdbcType="VARCHAR" />
+    <result column="business_technology" property="businessTechnology" jdbcType="VARCHAR" />
+    <result column="business_goods" property="businessGoods" jdbcType="VARCHAR" />
+    <result column="nonnative" property="nonnative" jdbcType="VARCHAR" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+    <result column="govern_area" property="governArea" jdbcType="VARCHAR" />
+    <result column="credit_end_date" property="creditEndDate" jdbcType="TIMESTAMP" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="county" property="county" jdbcType="INTEGER" />
+    <result column="provinceName" property="provinceName" jdbcType="VARCHAR" />
+    <result column="cityName" property="cityName" jdbcType="VARCHAR" />
+    <result column="countyName" property="countyName" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    id, owner_type, owner_name, owner_jc, register_capital, register_time, area, person_num,
+    icbc_code, credit_code, owner_addr, register_addr, mgr_code, register_code, mgr_area, 
+    state, contact, contact_phone, govern_code, important_level, is_important_chemical, 
+    is_important_crafts, owner_zt, owner_zt_msg, owner_nature, corp_name, corp_card, 
+    corp_card_number, corp_phone, corp_photo, industry, lon, lat, business_level_count, 
+    business_technology, business_goods, nonnative, created_at, updated_at, is_deleted,govern_area,province,city,county
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="WaybillOwnerDetailsDTOMap" parameterType="java.lang.String" >
+    select a.id, a.owner_type, a.owner_name, a.owner_jc, a.register_capital, a.register_time, a.area, a.person_num,
+    a.icbc_code, a.credit_code, a.owner_addr, a.register_addr, a.mgr_code, a.register_code, a.mgr_area,a.credit_end_date,
+    a.state, a.contact, a.contact_phone, a.govern_code, a.important_level, a.is_important_chemical,
+    a.is_important_crafts, a.owner_zt, a.owner_zt_msg, a.owner_nature, a.corp_name, a.corp_card,
+    a.corp_card_number, a.corp_phone, a.corp_photo, a.industry, a.lon, a.lat, a.business_level_count,
+    a.business_technology, a.business_goods, a.nonnative, a.created_at, a.updated_at, a.is_deleted,
+    a.govern_area,a.province,a.city,a.county,b.location_name as provinceName,c.location_name as cityName,
+    d.location_name as countyName from waybill_owner a left join
+    sys_location b
+    on a.province = b.location_code left JOIN sys_location c
+    on a.city=c.location_code left join sys_location d
+    on a.county= d.location_code
+    where a.id = #{id,jdbcType=VARCHAR} and a.is_deleted = 0;
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from waybill_owner
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillOwner" >
+    insert into waybill_owner (id, owner_type, owner_name, govern_area
+      owner_jc, register_capital, register_time, 
+      area, person_num, icbc_code, 
+      credit_code, owner_addr, register_addr, 
+      mgr_code, register_code, mgr_area, 
+      state, contact, contact_phone, 
+      govern_code, important_level, is_important_chemical, 
+      is_important_crafts, owner_zt, owner_zt_msg, 
+      owner_nature, corp_name, corp_card, 
+      corp_card_number, corp_phone, corp_photo, 
+      industry, lon, lat, 
+      business_level_count, business_technology, 
+      business_goods, nonnative, created_at, 
+      updated_at, is_deleted)
+    values (#{id,jdbcType=VARCHAR}, #{ownerType,jdbcType=VARCHAR}, #{ownerName,jdbcType=VARCHAR}, #{governArea,jdbcType=VARCHAR}
+      #{ownerJc,jdbcType=VARCHAR}, #{registerCapital,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{area,jdbcType=DOUBLE}, #{personNum,jdbcType=VARCHAR}, #{icbcCode,jdbcType=VARCHAR}, 
+      #{creditCode,jdbcType=VARCHAR}, #{ownerAddr,jdbcType=VARCHAR}, #{registerAddr,jdbcType=VARCHAR}, 
+      #{mgrCode,jdbcType=VARCHAR}, #{registerCode,jdbcType=VARCHAR}, #{mgrArea,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{contact,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, 
+      #{governCode,jdbcType=VARCHAR}, #{importantLevel,jdbcType=INTEGER}, #{isImportantChemical,jdbcType=INTEGER}, 
+      #{isImportantCrafts,jdbcType=INTEGER}, #{ownerZt,jdbcType=INTEGER}, #{ownerZtMsg,jdbcType=VARCHAR}, 
+      #{ownerNature,jdbcType=INTEGER}, #{corpName,jdbcType=VARCHAR}, #{corpCard,jdbcType=INTEGER}, 
+      #{corpCardNumber,jdbcType=VARCHAR}, #{corpPhone,jdbcType=VARCHAR}, #{corpPhoto,jdbcType=VARCHAR}, 
+      #{industry,jdbcType=INTEGER}, #{lon,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, 
+      #{businessLevelCount,jdbcType=VARCHAR}, #{businessTechnology,jdbcType=VARCHAR}, 
+      #{businessGoods,jdbcType=VARCHAR}, #{nonnative,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.vo.WaybillOwnerVo" useGeneratedKeys="true" keyProperty="id"  >
+    insert into waybill_owner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ownerType != null" >
+        owner_type,
+      </if>
+      <if test="ownerName != null" >
+        owner_name,
+      </if>
+      <if test="ownerJc != null" >
+        owner_jc,
+      </if>
+      <if test="registerCapital != null" >
+        register_capital,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="personNum != null" >
+        person_num,
+      </if>
+      <if test="icbcCode != null" >
+        icbc_code,
+      </if>
+      <if test="creditCode != null" >
+        credit_code,
+      </if>
+      <if test="ownerAddr != null" >
+        owner_addr,
+      </if>
+      <if test="registerAddr != null" >
+        register_addr,
+      </if>
+      <if test="mgrCode != null" >
+        mgr_code,
+      </if>
+      <if test="registerCode != null" >
+        register_code,
+      </if>
+      <if test="mgrArea != null" >
+        mgr_area,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone,
+      </if>
+      <if test="governCode != null" >
+        govern_code,
+      </if>
+      <if test="importantLevel != null" >
+        important_level,
+      </if>
+      <if test="isImportantChemical != null" >
+        is_important_chemical,
+      </if>
+      <if test="isImportantCrafts != null" >
+        is_important_crafts,
+      </if>
+      <if test="ownerZt != null" >
+        owner_zt,
+      </if>
+      <if test="ownerZtMsg != null" >
+        owner_zt_msg,
+      </if>
+      <if test="ownerNature != null" >
+        owner_nature,
+      </if>
+      <if test="corpName != null" >
+        corp_name,
+      </if>
+      <if test="corpCard != null" >
+        corp_card,
+      </if>
+      <if test="corpCardNumber != null" >
+        corp_card_number,
+      </if>
+      <if test="corpPhone != null" >
+        corp_phone,
+      </if>
+      <if test="corpPhoto != null" >
+        corp_photo,
+      </if>
+      <if test="industry != null" >
+        industry,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="businessLevelCount != null" >
+        business_level_count,
+      </if>
+      <if test="businessTechnology != null" >
+        business_technology,
+      </if>
+      <if test="businessGoods != null" >
+        business_goods,
+      </if>
+      <if test="nonnative != null" >
+        nonnative,
+      </if>
+      <if test="governArea!=null">
+        govern_area,
+      </if>
+      <if test="creditEndDate!=null">
+        credit_end_date,
+      </if>
+      <if test="province!=null">
+        province,
+      </if>
+      <if test="city!=null">
+        city,
+      </if>
+      <if test="county!=null">
+        county,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ownerType != null" >
+        #{ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null" >
+        #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerJc != null" >
+        #{ownerJc,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCapital != null" >
+        #{registerCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="personNum != null" >
+        #{personNum,jdbcType=VARCHAR},
+      </if>
+      <if test="icbcCode != null" >
+        #{icbcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null" >
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAddr != null" >
+        #{ownerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddr != null" >
+        #{registerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mgrCode != null" >
+        #{mgrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCode != null" >
+        #{registerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mgrArea != null" >
+        #{mgrArea,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="governCode != null" >
+        #{governCode,jdbcType=VARCHAR},
+      </if>
+      <if test="importantLevel != null" >
+        #{importantLevel,jdbcType=INTEGER},
+      </if>
+      <if test="isImportantChemical != null" >
+        #{isImportantChemical,jdbcType=INTEGER},
+      </if>
+      <if test="isImportantCrafts != null" >
+        #{isImportantCrafts,jdbcType=INTEGER},
+      </if>
+      <if test="ownerZt != null" >
+        #{ownerZt,jdbcType=INTEGER},
+      </if>
+      <if test="ownerZtMsg != null" >
+        #{ownerZtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNature != null" >
+        #{ownerNature,jdbcType=INTEGER},
+      </if>
+      <if test="corpName != null" >
+        #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpCard != null" >
+        #{corpCard,jdbcType=INTEGER},
+      </if>
+      <if test="corpCardNumber != null" >
+        #{corpCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="corpPhone != null" >
+        #{corpPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="corpPhoto != null" >
+        #{corpPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        #{industry,jdbcType=INTEGER},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLevelCount != null" >
+        #{businessLevelCount,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTechnology != null" >
+        #{businessTechnology,jdbcType=VARCHAR},
+      </if>
+      <if test="businessGoods != null" >
+        #{businessGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="nonnative != null" >
+        #{nonnative,jdbcType=VARCHAR},
+      </if>
+      <if test="governArea!=null">
+        #{governArea,jdbcType=VARCHAR},
+      </if>
+      <if test="creditEndDate!=null">
+        #{creditEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="province!=null">
+        #{province,jdbcType=INTEGER},
+      </if>
+      <if test="city!=null">
+        #{city,jdbcType=INTEGER},
+      </if>
+      <if test="county!=null">
+        #{county,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.vo.WaybillOwnerVo" >
+    update waybill_owner
+    <set >
+      <if test="ownerType != null" >
+        owner_type = #{ownerType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerName != null" >
+        owner_name = #{ownerName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerJc != null" >
+        owner_jc = #{ownerJc,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCapital != null" >
+        register_capital = #{registerCapital,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=DOUBLE},
+      </if>
+      <if test="personNum != null" >
+        person_num = #{personNum,jdbcType=VARCHAR},
+      </if>
+      <if test="icbcCode != null" >
+        icbc_code = #{icbcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditCode != null" >
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAddr != null" >
+        owner_addr = #{ownerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddr != null" >
+        register_addr = #{registerAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="mgrCode != null" >
+        mgr_code = #{mgrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="registerCode != null" >
+        register_code = #{registerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mgrArea != null" >
+        mgr_area = #{mgrArea,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="contactPhone != null" >
+        contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="governCode != null" >
+        govern_code = #{governCode,jdbcType=VARCHAR},
+      </if>
+      <if test="importantLevel != null" >
+        important_level = #{importantLevel,jdbcType=INTEGER},
+      </if>
+      <if test="isImportantChemical != null" >
+        is_important_chemical = #{isImportantChemical,jdbcType=INTEGER},
+      </if>
+      <if test="isImportantCrafts != null" >
+        is_important_crafts = #{isImportantCrafts,jdbcType=INTEGER},
+      </if>
+      <if test="ownerZtMsg != null" >
+        owner_zt_msg = #{ownerZtMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerNature != null" >
+        owner_nature = #{ownerNature,jdbcType=INTEGER},
+      </if>
+      <if test="corpName != null" >
+        corp_name = #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpCard != null" >
+        corp_card = #{corpCard,jdbcType=INTEGER},
+      </if>
+      <if test="corpCardNumber != null" >
+        corp_card_number = #{corpCardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="corpPhone != null" >
+        corp_phone = #{corpPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="corpPhoto != null" >
+        corp_photo = #{corpPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null" >
+        industry = #{industry,jdbcType=INTEGER},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLevelCount != null" >
+        business_level_count = #{businessLevelCount,jdbcType=VARCHAR},
+      </if>
+      <if test="businessTechnology != null" >
+        business_technology = #{businessTechnology,jdbcType=VARCHAR},
+      </if>
+      <if test="businessGoods != null" >
+        business_goods = #{businessGoods,jdbcType=VARCHAR},
+      </if>
+      <if test="nonnative != null" >
+        nonnative = #{nonnative,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="governArea!=null">
+        govern_area=#{governArea,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=TINYINT},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=TINYINT},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+    <if test="isScope">
+      and id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillOwner" >
+    update waybill_owner
+    set owner_type = #{ownerType,jdbcType=VARCHAR},
+      owner_name = #{ownerName,jdbcType=VARCHAR},
+      owner_jc = #{ownerJc,jdbcType=VARCHAR},
+      register_capital = #{registerCapital,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      area = #{area,jdbcType=DOUBLE},
+      person_num = #{personNum,jdbcType=VARCHAR},
+      icbc_code = #{icbcCode,jdbcType=VARCHAR},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      owner_addr = #{ownerAddr,jdbcType=VARCHAR},
+      register_addr = #{registerAddr,jdbcType=VARCHAR},
+      mgr_code = #{mgrCode,jdbcType=VARCHAR},
+      register_code = #{registerCode,jdbcType=VARCHAR},
+      mgr_area = #{mgrArea,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      contact = #{contact,jdbcType=VARCHAR},
+      contact_phone = #{contactPhone,jdbcType=VARCHAR},
+      govern_code = #{governCode,jdbcType=VARCHAR},
+      important_level = #{importantLevel,jdbcType=INTEGER},
+      is_important_chemical = #{isImportantChemical,jdbcType=INTEGER},
+      is_important_crafts = #{isImportantCrafts,jdbcType=INTEGER},
+      owner_zt = #{ownerZt,jdbcType=INTEGER},
+      owner_zt_msg = #{ownerZtMsg,jdbcType=VARCHAR},
+      owner_nature = #{ownerNature,jdbcType=INTEGER},
+      corp_name = #{corpName,jdbcType=VARCHAR},
+      corp_card = #{corpCard,jdbcType=INTEGER},
+      corp_card_number = #{corpCardNumber,jdbcType=VARCHAR},
+      corp_phone = #{corpPhone,jdbcType=VARCHAR},
+      corp_photo = #{corpPhoto,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=INTEGER},
+      lon = #{lon,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      business_level_count = #{businessLevelCount,jdbcType=VARCHAR},
+      business_technology = #{businessTechnology,jdbcType=VARCHAR},
+      business_goods = #{businessGoods,jdbcType=VARCHAR},
+      nonnative = #{nonnative,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      govern_area =#{governArea,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectWaybillOwnerLike"   resultMap="WaybillOwnerDetailsDTOMap">
+    select a.id, a.owner_type, a.owner_name, a.owner_jc, a.register_capital, a.register_time, a.area, a.person_num,
+    a.icbc_code, a.credit_code, a.owner_addr, a.register_addr, a.mgr_code, a.register_code, a.mgr_area,a.credit_end_date,
+    a.state, a.contact, a.contact_phone, a.govern_code, a.important_level, a.is_important_chemical,
+    a.is_important_crafts, a.owner_zt, a.owner_zt_msg, a.owner_nature, a.corp_name, a.corp_card,
+    a.corp_card_number, a.corp_phone, a.corp_photo, a.industry, a.lon, a.lat, a.business_level_count,
+    a.business_technology, a.business_goods, a.nonnative, a.created_at, a.updated_at, a.is_deleted,
+    a.govern_area,a.province,a.city,a.county,b.location_name as provinceName,c.location_name as cityName,
+    d.location_name as countyName from waybill_owner a left join
+    sys_location b
+    on a.province = b.location_code left JOIN sys_location c
+    on a.city=c.location_code left join sys_location d
+    on a.county= d.location_code
+    <where>
+      <if test="enterpriseLlistVO.ownerName != null and enterpriseLlistVO.ownerName != ''">
+        a.owner_name like concat(concat('%',#{enterpriseLlistVO.ownerName}),'%')
+      </if>
+      <if test="enterpriseLlistVO.contact !=null and enterpriseLlistVO.contact !=''">
+        and   a.contact like  concat(concat('%',#{enterpriseLlistVO.contact}),'%')
+      </if>
+      <if test="enterpriseLlistVO.creditCode  !=null and enterpriseLlistVO.creditCode !=''">
+        and a.credit_code like  concat(concat('%',#{enterpriseLlistVO.creditCode} ),'%')
+      </if>
+      <if test="enterpriseLlistVO.ownerTypes!=null and enterpriseLlistVO.ownerTypes.size()>0">
+      and a.owner_type in
+      <foreach collection="enterpriseLlistVO.ownerTypes" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      </if>
+      <if test="enterpriseLlistVO.isScope">
+        and a.id in
+        <foreach collection="enterpriseLlistVO.dataList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+      </if>
+        and a.is_deleted = 0 ORDER  by a.id desc
+  </where>
+   limit #{enterpriseLlistVO.pageSize} offset #{enterpriseLlistVO.page}
+  </select>
+<!--下拉框-->
+  <select id="dropdown" parameterType="java.lang.String"  resultType="com.thundersdata.backend.basic.dto.WaybillOwnerDTO">
+        select id  as id  ,owner_name as ownerName  ,contact as  contact ,contact_phone  as contactPhone
+        ,owner_type as ownerType ,credit_code as creditCode  from waybill_owner
+        <where>
+          <if test="ownerName!=null and ownerName != ''">
+            owner_name like concat(concat('%',#{ownerName}),'%')
+          </if>
+          and is_deleted = 0 limit 20
+        </where>
+
+  </select>
+
+  <!--  条件查询数量-->
+  <select id="getCountByCondition" resultType="java.lang.Integer" parameterType="com.thundersdata.backend.basic.vo.EnterpriseLlistVo">
+    select count(*)
+    FROM
+    waybill_owner
+   <where>
+     <if test="enterpriseLlistVO.ownerName != null and enterpriseLlistVO.ownerName !='' ">
+       owner_name like concat(concat('%',#{enterpriseLlistVO.ownerName}),'%')
+     </if>
+     <if test="enterpriseLlistVO.contact !=null and enterpriseLlistVO.contact !=''">
+       or   contact like  concat(concat('%',#{enterpriseLlistVO.contact}),'%')
+     </if>
+     <if test="enterpriseLlistVO.creditCode !=null and enterpriseLlistVO.creditCode !=''">
+       or  credit_code like  concat(concat('%',#{enterpriseLlistVO.creditCode} ),'%')
+     </if>
+     and  is_deleted = 0
+     <if test="enterpriseLlistVO.isScope">
+       and id in
+       <foreach collection="enterpriseLlistVO.dataList" item="item" index="index"
+                open="(" separator="," close=")">#{item}
+       </foreach>
+     </if>
+     <if test="enterpriseLlistVO.ownerTypes!=null and enterpriseLlistVO.ownerTypes.size()>0">
+     and owner_type in
+     <foreach collection="enterpriseLlistVO.ownerTypes" item="item" index="index"
+              open="(" separator="," close=")">#{item}
+     </foreach>
+     </if>
+   </where>
+  </select>
+    <update id="deleteId" parameterType="list">
+        update  waybill_owner
+        set is_deleted = 1
+        where id in
+      <foreach collection="list" item="item" open="(" close=")" separator=",">
+         #{item.id}
+      </foreach>
+      <if test="isScope">
+        and id in
+        <foreach collection="dataList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+      </if>
+    </update>
+<!--批量修改企业审核状态-->
+<update id="batchModifyStatus"  parameterType="list">
+  update waybill_owner set owner_zt = CASE id
+  <foreach collection="list"  item="item" >
+    WHEN #{item.id} THEN 5
+  </foreach>
+  END
+  <where>
+    id in
+    <foreach collection="list"  item="item" open="(" separator="," close=")" >
+      #{item.id}
+    </foreach>
+  </where>
+</update>
+
+  <!--数据范围判断下拉框-->
+  <select id="dataDropDown" parameterType="java.lang.String"  resultType="com.thundersdata.backend.basic.dto.WaybillOwnerDTO">
+    select id  as id  ,owner_name as ownerName  ,contact as  contact ,contact_phone  as contactPhone
+    ,owner_type as ownerType ,credit_code as creditCode  from waybill_owner
+    <where>
+      <if test="ownerName!=null and ownerName != ''">
+        owner_name like concat(concat('%',#{ownerName}),'%')
+      </if>
+      <if test="isScope">
+        and id in
+        <foreach collection="dataList" item="item" index="index"
+                 open="(" separator="," close=")">#{item}
+        </foreach>
+      </if>
+      and is_deleted = 0 limit 20
+    </where>
+
+  </select>
+  <!--经营许可证到期企业-->
+  <select id="ExpiredOwner" resultType="com.thundersdata.backend.basic.vo.UserExpiredVO" >
+    select id as id ,
+           owner_name as name,
+           credit_end_date as employedEndDate
+        from waybill_owner
+    where
+        province = #{userExpiredDTO.province}
+        and city = #{userExpiredDTO.city}
+        and county = #{userExpiredDTO.county}
+        and credit_end_date &lt; #{newTime}
+        and is_deleted =  0
+  </select>
+
+<!--经营许可证过期 企业 时间段-->
+  <select id="HistoryExpiredOwner" parameterType="com.thundersdata.backend.basic.dto.UserExpiredDTO" resultType="com.thundersdata.backend.basic.vo.UserExpiredVO" >
+    select id as id ,
+           owner_name as name,
+           credit_end_date as employedEndDate
+        from waybill_owner
+    where
+        province = #{userExpiredDTO.province}
+        and city = #{userExpiredDTO.city}
+        and county = #{userExpiredDTO.county}
+        and credit_end_date BETWEEN #{userExpiredDTO.startDate} and #{userExpiredDTO.endDate}
+        and is_deleted =  0
+  </select>
+  <!--根据多个企业id查询企业详细信息-->
+  <select id="selectByOwerIds" resultMap="WaybillOwnerDetailsDTOMap" parameterType="java.lang.String" >
+    select a.id, a.owner_type, a.owner_name, a.owner_jc, a.register_capital, a.register_time, a.area, a.person_num,
+    a.icbc_code, a.credit_code, a.owner_addr, a.register_addr, a.mgr_code, a.register_code, a.mgr_area,a.credit_end_date,
+    a.state, a.contact, a.contact_phone, a.govern_code, a.important_level, a.is_important_chemical,
+    a.is_important_crafts, a.owner_zt, a.owner_zt_msg, a.owner_nature, a.corp_name, a.corp_card,
+    a.corp_card_number, a.corp_phone, a.corp_photo, a.industry, a.lon, a.lat, a.business_level_count,
+    a.business_technology, a.business_goods, a.nonnative, a.created_at, a.updated_at, a.is_deleted,
+    a.govern_area,a.province,a.city,a.county,b.location_name as provinceName,c.location_name as cityName,
+    d.location_name as countyName from waybill_owner a left join
+    sys_location b
+    on a.province = b.location_code left JOIN sys_location c
+    on a.city=c.location_code left join sys_location d
+    on a.county= d.location_code
+    where a.is_deleted = 0
+    and a.id in
+    <foreach collection="ownerIds" item="item" index="index"
+             open="(" separator="," close=")">#{item}
+    </foreach>
+  </select>
+
+
+</mapper>

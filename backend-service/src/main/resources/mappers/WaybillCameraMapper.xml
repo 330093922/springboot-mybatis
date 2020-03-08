@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillCameraMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillCamera" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
+    <result column="equipment_no" property="equipmentNo" jdbcType="VARCHAR" />
+    <result column="equipment_status" property="equipmentStatus" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="install_area" property="installArea" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="rtmp_url" property="rtmpUrl" jdbcType="VARCHAR" />
+    <result column="hls_url" property="hlsUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_id, equipment_no, equipment_status, type, install_area, user_id, password, 
+    name, lon, lat, rtmp_url, hls_url, status, created_at, updated_at, is_deleted
+  </sql>
+  <resultMap id="DTOResultMap" type="com.thundersdata.backend.basic.dto.WaybillCameraDTO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
+    <result column="owner_name" property="ownerName" jdbcType="INTEGER" />
+    <result column="equipment_no" property="equipmentNo" jdbcType="VARCHAR" />
+    <result column="equipment_status" property="equipmentStatus" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="install_area" property="installArea" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="lon" property="lon" jdbcType="VARCHAR" />
+    <result column="lat" property="lat" jdbcType="VARCHAR" />
+    <result column="rtmp_url" property="rtmpUrl" jdbcType="VARCHAR" />
+    <result column="hls_url" property="hlsUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="DTO_Column_List" >
+    a.id, owner_id, owner_name,equipment_no, equipment_status, type, install_area, user_id, password,
+    name, a.lon, a.lat, rtmp_url, hls_url, a.status, a.created_at, a.updated_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from waybill_camera
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_camera
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillCamera" >
+    insert into waybill_camera (id, owner_id, equipment_no, 
+      equipment_status, type, install_area, 
+      user_id, password, name, 
+      lon, lat, rtmp_url, 
+      hls_url, status, created_at, 
+      updated_at, is_deleted)
+    values (#{id,jdbcType=INTEGER}, #{ownerId,jdbcType=INTEGER}, #{equipmentNo,jdbcType=VARCHAR}, 
+      #{equipmentStatus,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{installArea,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{lon,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{rtmpUrl,jdbcType=VARCHAR}, 
+      #{hlsUrl,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillCamera" >
+    insert into waybill_camera
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="equipmentNo != null" >
+        equipment_no,
+      </if>
+      <if test="equipmentStatus != null" >
+        equipment_status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="installArea != null" >
+        install_area,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="lon != null" >
+        lon,
+      </if>
+      <if test="lat != null" >
+        lat,
+      </if>
+      <if test="rtmpUrl != null" >
+        rtmp_url,
+      </if>
+      <if test="hlsUrl != null" >
+        hls_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentNo != null" >
+        #{equipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentStatus != null" >
+        #{equipmentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="installArea != null" >
+        #{installArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="rtmpUrl != null" >
+        #{rtmpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hlsUrl != null" >
+        #{hlsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillCamera" >
+    update waybill_camera
+    <set >
+      <if test="ownerId != null" >
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentNo != null" >
+        equipment_no = #{equipmentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentStatus != null" >
+        equipment_status = #{equipmentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="installArea != null" >
+        install_area = #{installArea,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="lon != null" >
+        lon = #{lon,jdbcType=VARCHAR},
+      </if>
+      <if test="lat != null" >
+        lat = #{lat,jdbcType=VARCHAR},
+      </if>
+      <if test="rtmpUrl != null" >
+        rtmp_url = #{rtmpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hlsUrl != null" >
+        hls_url = #{hlsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillCamera" >
+    update waybill_camera
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      equipment_no = #{equipmentNo,jdbcType=VARCHAR},
+      equipment_status = #{equipmentStatus,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      install_area = #{installArea,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      lon = #{lon,jdbcType=VARCHAR},
+      lat = #{lat,jdbcType=VARCHAR},
+      rtmp_url = #{rtmpUrl,jdbcType=VARCHAR},
+      hls_url = #{hlsUrl,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+<!--  查询数量-->
+  <select id="getCountByCondition" resultType="java.lang.Integer">
+    select count(*)
+    from
+    waybill_camera a
+    left join
+    waybill_owner b
+    on
+    a.owner_id = b.id and b.is_deleted = 0
+    where
+    a.is_deleted = 0
+    <if test="equipmentNo != null" >
+      and equipment_no like #{equipmentNo,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+      and name like #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="installArea != null" >
+      and install_area like #{installArea,jdbcType=VARCHAR}
+    </if>
+    <if test="isScope">
+    and owner_id in
+    <foreach collection="ownerIds" item="item" index="index"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    </if>
+
+  </select>
+
+<!--查询列表-->
+  <select id="getListByCondition" resultMap="DTOResultMap">
+    select b.owner_name,
+    <include refid="DTO_Column_List" />
+    from
+    waybill_camera a
+    left join
+    waybill_owner b
+    on
+    a.owner_id = b.id and b.is_deleted = 0
+    where
+     a.is_deleted = 0
+    <if test="equipmentNo != null" >
+      and equipment_no like #{equipmentNo,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null" >
+      and name like #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="installArea != null" >
+      and install_area like #{installArea,jdbcType=VARCHAR}
+    </if>
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+
+    order by a.id,a.updated_at
+    <if test="limit != null and offset != null" >
+    limit #{limit} offset #{offset}
+    </if>
+  </select>
+
+<!--  查询摄像头详情-->
+  <select id="getDetailsByCondition" resultMap="DTOResultMap" parameterType="java.lang.Integer">
+    select b.owner_name,
+    <include refid="DTO_Column_List" />
+    from
+    waybill_camera a,
+    waybill_owner b
+    where
+    a.owner_id = b.id
+    and
+    a.id = #{id}
+    and is_deleted=0
+  </select>
+
+  <!--  摄像头下拉框-->
+  <select id="dropList" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id,name,equipment_no,install_area
+    from waybill_camera
+    <where>
+      <if test="name != null and name != '' ">
+        and name like concat('%',#{name},'%')
+      </if>
+      and is_deleted=0 limit 20
+    </where>
+  </select>
+
+  <!--  摄像头下拉框-->
+  <select id="dropListWithScope" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id,name,equipment_no,install_area
+    from waybill_camera
+    <where>
+      <if test="name != null and name != '' ">
+        and name like concat('%',#{name},'%')
+      </if>
+      <if test="isScope">
+        and owner_id in
+        <foreach collection="ownerIds" item="item" index="index"
+                 open="(" separator="," close=")">
+          #{item}
+        </foreach>
+      </if>
+      and is_deleted=0 limit 20
+    </where>
+  </select>
+
+</mapper>

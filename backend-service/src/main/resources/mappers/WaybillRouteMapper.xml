@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillRouteMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillRoute" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="start_addr" property="startAddr" jdbcType="VARCHAR" />
+    <result column="way" property="way" jdbcType="VARCHAR" />
+    <result column="km" property="km" jdbcType="VARCHAR" />
+    <result column="stop_addr" property="stopAddr" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillRouteWithBLOBs" extends="BaseResultMap" >
+    <result column="notice" property="notice" jdbcType="LONGVARCHAR" />
+    <result column="map" property="map" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <resultMap id="BaseParameterMap" type="com.thundersdata.backend.basic.vo.WaybillRouteVO" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="start_addr" property="startAddr" jdbcType="VARCHAR" />
+    <result column="way" property="way" jdbcType="VARCHAR" />
+    <result column="stop_addr" property="stopAddr" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, owner_id, name, start_addr, way, km, stop_addr, status, created_at, updated_at, 
+    is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    notice, map
+  </sql>
+
+  <!-- 查看线路管理详情 -->
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_route
+    where id = #{id,jdbcType=INTEGER}
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_route
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillRouteWithBLOBs" >
+    insert into waybill_route (id, owner_id, name, 
+      start_addr, way, km, 
+      stop_addr, status, created_at, 
+      updated_at, is_deleted, notice, 
+      map)
+    values (#{id,jdbcType=INTEGER}, #{ownerId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{startAddr,jdbcType=VARCHAR}, #{way,jdbcType=VARCHAR}, #{km,jdbcType=VARCHAR},
+      #{stopAddr,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, #{notice,jdbcType=LONGVARCHAR}, 
+      #{map,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <!-- 插入一条线路管理数据 -->
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillRouteWithBLOBs" >
+    insert into waybill_route
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <!--<if test="id != null" >
+        id,
+      </if>-->
+      <if test="userId != null" >
+        owner_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="startAddr != null" >
+        start_addr,
+      </if>
+      <if test="way != null" >
+        way,
+      </if>
+      <if test="km != null" >
+        km,
+      </if>
+      <if test="stopAddr != null" >
+        stop_addr,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="notice != null" >
+        notice,
+      </if>
+      <if test="map != null" >
+        map,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <!--<if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>-->
+      <if test="userId != null" >
+        (select owner_id from waybill_user where id = #{userId, jdbcType=INTEGER}),
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddr != null" >
+        #{startAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=VARCHAR},
+      </if>
+      <if test="km != null" >
+        #{km,jdbcType=VARCHAR},
+      </if>
+      <if test="stopAddr != null" >
+        #{stopAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="notice != null" >
+        #{notice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="map != null" >
+        #{map,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 修改一条线路管理数据 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillRouteWithBLOBs" >
+    update waybill_route
+    <set>
+      <if test="ownerId != null" >
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startAddr != null" >
+        start_addr = #{startAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="way != null" >
+        way = #{way,jdbcType=VARCHAR},
+      </if>
+      <if test="km != null" >
+        km = #{km,jdbcType=VARCHAR},
+      </if>
+      <if test="stopAddr != null" >
+        stop_addr = #{stopAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="notice != null" >
+        notice = #{notice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="map != null" >
+        map = #{map,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillRouteWithBLOBs" >
+    update waybill_route
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      start_addr = #{startAddr,jdbcType=VARCHAR},
+      way = #{way,jdbcType=VARCHAR},
+      km = #{km,jdbcType=VARCHAR},
+      stop_addr = #{stopAddr,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      notice = #{notice,jdbcType=LONGVARCHAR},
+      map = #{map,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillRoute" >
+    update waybill_route
+    set owner_id = #{ownerId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      start_addr = #{startAddr,jdbcType=VARCHAR},
+      way = #{way,jdbcType=VARCHAR},
+      km = #{km,jdbcType=VARCHAR},
+      stop_addr = #{stopAddr,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 条件查询线路管理列表 -->
+  <!--
+
+  <if test="isScope">
+    and owner_id in
+    <foreach collection="dataList" item="item" index="index"
+             open="(" separator="," close=")">#{item}
+    </foreach>
+  </if>
+
+  -->
+  <select id="selectList" parameterType="com.thundersdata.backend.basic.vo.WaybillRouteVO" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from waybill_route
+    <where>
+      <!--线路名称-->
+      <if test="waybillRouteVO.name != null and waybillRouteVO.name != ''">
+        and name like CONCAT('%',#{waybillRouteVO.name},'%')
+      </if>
+      <!--途径-->
+      <if test="waybillRouteVO.way != null and waybillRouteVO.way != ''">
+        and way like CONCAT('%',#{waybillRouteVO.way},'%')
+      </if>
+      <!--始发地-->
+      <if test="waybillRouteVO.startAddr != null and waybillRouteVO.startAddr != ''">
+        and start_addr like CONCAT('%',#{waybillRouteVO.startAddr},'%')
+      </if>
+      <!--终点站-->
+      <if test="waybillRouteVO.stopAddr != null and waybillRouteVO.stopAddr != ''">
+        and stop_addr like CONCAT('%',#{waybillRouteVO.stopAddr},'%')
+      </if>
+      and is_deleted = 0
+      order by id
+      limit #{page} offset #{pageSize}
+    </where>
+  </select>
+
+  <!--统计条件查询中的总条数-->
+  <select id="getCountByCondition" parameterType="com.thundersdata.backend.basic.vo.WaybillRouteVO" resultType="int">
+    select count(1) from waybill_route
+    <where>
+      <!--线路名称-->
+      <if test="name != null and name != ''">
+        and name like CONCAT('%',#{name},'%')
+      </if>
+      <!--途径-->
+      <if test="way != null and way != ''">
+        and way like CONCAT('%',#{way},'%')
+      </if>
+      <!--始发地-->
+      <if test="startAddr != null and startAddr != ''">
+        and start_addr like CONCAT('%',#{startAddr},'%')
+      </if>
+      <!--终点站-->
+      <if test="stopAddr != null and stopAddr != ''">
+        and stop_addr like CONCAT('%',#{stopAddr},'%')
+      </if>
+      and is_deleted = 0
+    </where>
+  </select>
+
+  <!-- 修改一条线路管理数据为“已删除” -->
+  <update id="deleteById" parameterType="int">
+    update waybill_route set is_deleted = 1 where id = #{id}
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </update>
+
+  <!-- 线路下拉框查询 -->
+  <select id="selectDropList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select owner_id, name, start_addr, way, km, stop_addr, notice,
+    map, status
+    from waybill_route
+    where name like CONCAT('%',#{name},'%')
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+    limit 0, 20
+  </select>
+
+  <!-- 去掉分页功能，全列表返回的查询 -->
+  <select id="selectWholeList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from waybill_route
+    <if test="isScope">
+      owner_id in
+      <foreach collection="dataList" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+    </if>
+  </select>
+</mapper>

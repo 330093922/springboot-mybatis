@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.AuthRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.AuthRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="scope" property="scope" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="INTEGER" />
+    <result column="is_admin" property="isAdmin" jdbcType="TINYINT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="deleted" property="deleted" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_name, description, scope, sn, is_admin, created_at, updated_at, deleted
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from auth_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="countAuthRole" resultType="java.lang.Integer">
+    select count(*) from auth_role
+    where deleted = 0
+    <if test="roleName!=null and roleName!=''">
+      and role_name like #{roleName}
+    </if>
+    <if test="description!=null and description!=''">
+      and description like #{description}
+    </if>
+  </select>
+  <select id="selectAuthRole" resultType="com.thundersdata.backend.basic.dto.AuthRoleDTO">
+    select
+    id, role_name roleName, description, sn, is_admin isAdmin, created_at createdAt, updated_at updatedAt, deleted, scope
+    from auth_role
+    where deleted = 0
+    <if test="roleName!=null and roleName!=''">
+      and role_name like #{roleName}
+    </if>
+    <if test="description!=null and description!=''">
+      and description like #{description}
+    </if>
+    order by id asc
+    limit #{page.limit} offset #{page.offset}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from auth_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <update id="deleteAuthRoleBatch" parameterType = "java.lang.String">
+      update auth_role set deleted = 1
+      where id in ${ids}
+    </update>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.AuthRole" >
+    insert into auth_role (id, role_name, description, 
+      sn, is_admin, created_at, updated_at,
+      deleted)
+    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{sn,jdbcType=INTEGER}, #{isAdmin,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP},
+      #{deleted,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.AuthRole" >
+    insert into auth_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="isAdmin != null" >
+        is_admin,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="isAdmin != null" >
+        #{isAdmin,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.AuthRole" >
+    update auth_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="isAdmin != null" >
+        is_admin = #{isAdmin,jdbcType=TINYINT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.AuthRole" >
+    update auth_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=INTEGER},
+      is_admin = #{isAdmin,jdbcType=TINYINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateScope">
+      update auth_role
+      set scope = #{scope}
+      where id = #{roleId}
+    </update>
+</mapper>

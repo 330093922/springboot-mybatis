@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillConsignMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.WaybillConsign" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="consign_code" property="consignCode" jdbcType="VARCHAR" />
+    <result column="shipper_id" property="shipperId" jdbcType="INTEGER" />
+    <result column="shipment_id" property="shipmentId" jdbcType="INTEGER" />
+    <result column="receiving_id" property="receivingId" jdbcType="INTEGER" />
+    <result column="expediter_id" property="expediterId" jdbcType="INTEGER" />
+    <result column="shipment_start" property="shipmentStart" jdbcType="VARCHAR" />
+    <result column="shipment_stop" property="shipmentStop" jdbcType="VARCHAR" />
+    <result column="shipment_time" property="shipmentTime" jdbcType="TIMESTAMP" />
+    <result column="shipment_arrive" property="shipmentArrive" jdbcType="TIMESTAMP" />
+    <result column="emergency_phone" property="emergencyPhone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="is_city" property="isCity" jdbcType="BIT" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.thundersdata.backend.basic.model.WaybillConsignWithBLOBs" extends="BaseResultMap" >
+    <result column="attention" property="attention" jdbcType="LONGVARCHAR" />
+    <result column="measures" property="measures" jdbcType="LONGVARCHAR" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, consign_code, shipper_id, shipment_id, receiving_id, expediter_id, shipment_start, 
+    shipment_stop, shipment_time, shipment_arrive, emergency_phone, status, is_city,
+    created_at, updated_at, is_deleted
+  </sql>
+  <sql id="Blob_Column_List" >
+    attention, measures, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from waybill_consign
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from waybill_consign
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillConsignWithBLOBs" >
+    insert into waybill_consign (id, consign_code, shipper_id, 
+      shipment_id, receiving_id, expediter_id, 
+      shipment_start, shipment_stop, shipment_time, 
+      shipment_arrive, emergency_phone, status, 
+      is_city, created_at, updated_at, 
+      is_deleted, attention, measures, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{consignCode,jdbcType=VARCHAR}, #{shipperId,jdbcType=INTEGER}, 
+      #{shipmentId,jdbcType=INTEGER}, #{receivingId,jdbcType=INTEGER}, #{expediterId,jdbcType=INTEGER}, 
+      #{shipmentStart,jdbcType=VARCHAR}, #{shipmentStop,jdbcType=VARCHAR}, #{shipmentTime,jdbcType=TIMESTAMP}, 
+      #{shipmentArrive,jdbcType=TIMESTAMP}, #{emergencyPhone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{isCity,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{isDeleted,jdbcType=TINYINT}, #{attention,jdbcType=LONGVARCHAR}, #{measures,jdbcType=LONGVARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillConsignWithBLOBs" useGeneratedKeys="true" keyProperty="id">
+    insert into waybill_consign
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="consignCode != null" >
+        consign_code,
+      </if>
+      <if test="shipperId != null" >
+        shipper_id,
+      </if>
+      <if test="shipmentId != null" >
+        shipment_id,
+      </if>
+      <if test="receivingId != null" >
+        receiving_id,
+      </if>
+      <if test="expediterId != null" >
+        expediter_id,
+      </if>
+      <if test="shipmentStart != null" >
+        shipment_start,
+      </if>
+      <if test="shipmentStop != null" >
+        shipment_stop,
+      </if>
+      <if test="shipmentTime != null" >
+        shipment_time,
+      </if>
+      <if test="shipmentArrive != null" >
+        shipment_arrive,
+      </if>
+      <if test="emergencyPhone != null" >
+        emergency_phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="isCity != null" >
+        is_city,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="attention != null" >
+        attention,
+      </if>
+      <if test="measures != null" >
+        measures,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="consignCode != null" >
+        #{consignCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperId != null" >
+        #{shipperId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentId != null" >
+        #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="receivingId != null" >
+        #{receivingId,jdbcType=INTEGER},
+      </if>
+      <if test="expediterId != null" >
+        #{expediterId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentStart != null" >
+        #{shipmentStart,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentStop != null" >
+        #{shipmentStop,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentTime != null" >
+        #{shipmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentArrive != null" >
+        #{shipmentArrive,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emergencyPhone != null" >
+        #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isCity != null" >
+        #{isCity,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="attention != null" >
+        #{attention,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="measures != null" >
+        #{measures,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillConsignWithBLOBs" >
+    update waybill_consign
+    <set >
+      <if test="consignCode != null" >
+        consign_code = #{consignCode,jdbcType=VARCHAR},
+      </if>
+      <if test="shipperId != null" >
+        shipper_id = #{shipperId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentId != null" >
+        shipment_id = #{shipmentId,jdbcType=INTEGER},
+      </if>
+      <if test="receivingId != null" >
+        receiving_id = #{receivingId,jdbcType=INTEGER},
+      </if>
+      <if test="expediterId != null" >
+        expediter_id = #{expediterId,jdbcType=INTEGER},
+      </if>
+      <if test="shipmentStart != null" >
+        shipment_start = #{shipmentStart,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentStop != null" >
+        shipment_stop = #{shipmentStop,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentTime != null" >
+        shipment_time = #{shipmentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shipmentArrive != null" >
+        shipment_arrive = #{shipmentArrive,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emergencyPhone != null" >
+        emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="isCity != null" >
+        is_city = #{isCity,jdbcType=BIT},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="attention != null" >
+        attention = #{attention,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="measures != null" >
+        measures = #{measures,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.thundersdata.backend.basic.model.WaybillConsignWithBLOBs" >
+    update waybill_consign
+    set consign_code = #{consignCode,jdbcType=VARCHAR},
+      shipper_id = #{shipperId,jdbcType=INTEGER},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      receiving_id = #{receivingId,jdbcType=INTEGER},
+      expediter_id = #{expediterId,jdbcType=INTEGER},
+      shipment_start = #{shipmentStart,jdbcType=VARCHAR},
+      shipment_stop = #{shipmentStop,jdbcType=VARCHAR},
+      shipment_time = #{shipmentTime,jdbcType=TIMESTAMP},
+      shipment_arrive = #{shipmentArrive,jdbcType=TIMESTAMP},
+      emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      is_city = #{isCity,jdbcType=BIT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      attention = #{attention,jdbcType=LONGVARCHAR},
+      measures = #{measures,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillConsign" >
+    update waybill_consign
+    set consign_code = #{consignCode,jdbcType=VARCHAR},
+      shipper_id = #{shipperId,jdbcType=INTEGER},
+      shipment_id = #{shipmentId,jdbcType=INTEGER},
+      receiving_id = #{receivingId,jdbcType=INTEGER},
+      expediter_id = #{expediterId,jdbcType=INTEGER},
+      shipment_start = #{shipmentStart,jdbcType=VARCHAR},
+      shipment_stop = #{shipmentStop,jdbcType=VARCHAR},
+      shipment_time = #{shipmentTime,jdbcType=TIMESTAMP},
+      shipment_arrive = #{shipmentArrive,jdbcType=TIMESTAMP},
+      emergency_phone = #{emergencyPhone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      is_city = #{isCity,jdbcType=BIT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="deleteLogicByPrimaryKey" parameterType="java.lang.Integer" >
+    update waybill_consign
+    set is_deleted = 1
+    where id = #{id,jdbcType=INTEGER}
+    <if test="isScope">
+      and
+      (
+      shipper_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or receiving_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or shipment_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or expediter_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      )
+    </if>
+  </update>
+  <update id="rejectWaybillConsign">
+    update waybill_consign set status = 3, remark = #{remark} where id = #{id}
+    <if test="isScope">
+      and
+      (
+      shipper_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or receiving_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or shipment_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or expediter_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      )
+    </if>
+  </update>
+  <update id="updateWaybillConsignStatus">
+    update waybill_consign set status = #{status} where id = #{id}
+    <if test="isScope">
+      and
+      (
+      shipper_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or receiving_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or shipment_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or expediter_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      )
+    </if>
+  </update>
+
+  <select id="getWaybillConsignById" resultType="com.thundersdata.backend.basic.dto.WaybillConsignDTO">
+    select t1.id,
+      t1.consign_code consignCode,
+      t1.shipper_id shipperId,
+      shipper.owner_name shipperName,
+      shipper.contact shipperContact,
+      shipper.contact_phone shipperContactPhone,
+      t1.shipment_id shipmentId,
+      shipment.owner_name shipmentName,
+      shipment.contact shipmentContact,
+      shipment.contact_phone shipmentContactPhone,
+      t1.receiving_id receivingId,
+      receiving.owner_name receivingName,
+      receiving.contact receivingContact,
+      receiving.contact_phone receivingContactPhone,
+      t1.expediter_id expediterId,
+      expediter.owner_name expediterName,
+      expediter.contact expediterContact,
+      expediter.contact_phone expediterContactPhone,
+      t1.shipment_start shipmentStart,
+      t1.shipment_stop shipmentStop,
+      t1.shipment_time shipmentTime,
+      t1.shipment_arrive shipmentArrive,
+      t1.emergency_phone emergencyPhone,
+      t1.attention,
+      t1.measures,
+      t1.status,
+      t1.is_city,
+      t1.created_at,
+      t1.updated_at,
+      t1.is_deleted
+      from waybill_consign t1
+        left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+        left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+        left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+        left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+        where t1.is_deleted = 0
+        and t1.id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByConsignCode" resultType="java.lang.String">
+    select max(consign_code) from waybill_consign where consign_code like #{creditCode};
+  </select>
+  <select id="selectConsignList" resultType="com.thundersdata.backend.basic.dto.WaybillConsignDTO">
+
+    select t1.id,
+      t1.consign_code consignCode,
+      t1.shipper_id shipperId,
+      shipper.owner_name shipperName,
+      t1.shipment_id shipmentId,
+      shipment.owner_name shipmentName,
+      t1.receiving_id receivingId,
+      receiving.owner_name receivingName,
+      t1.expediter_id expediterId,
+      expediter.owner_name expediterName,
+      t1.shipment_start shipmentStart,
+      t1.shipment_stop shipmentStop,
+      t1.shipment_time shipmentTime,
+      t1.shipment_arrive shipmentArrive,
+      t1.emergency_phone emergencyPhone,
+      t1.attention,
+      t1.measures,
+      t1.status,
+      t1.is_city,
+      t1.created_at,
+      t1.updated_at,
+      t1.is_deleted
+      from waybill_consign t1
+        left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+        left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+        left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+        left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+        where t1.is_deleted = 0
+    <if test="consignCode != null">
+      and t1.consign_code like #{consignCode}
+    </if>
+    <if test="owner != null">
+      and shipper.name like #{owner}
+    </if>
+    and t1.status in
+    <foreach collection="states" index="index" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <if test="isScope">
+      and
+      (
+      shipper_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or receiving_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or shipment_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or expediter_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      )
+    </if>
+    order by t1.id desc
+    limit #{limit} offset #{offset}
+  </select>
+  <select id="countConsignList" resultType="java.lang.Integer">
+    select count(*)
+    from waybill_consign t1
+    left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+    left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+    left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+    left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+    where t1.is_deleted = 0
+    <if test="consignCode != null">
+      and t1.consign_code like #{consignCode}
+    </if>
+    <if test="owner != null">
+      and shipper.name like #{owner}
+    </if>
+    and t1.status in
+    <foreach collection="states" index="index" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+    <if test="isScope">
+      and
+      (
+      shipper_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or receiving_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or shipment_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      or expediter_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">#{item}
+      </foreach>
+      )
+    </if>
+  </select>
+
+
+
+  <select id="getWaybillConsignByIdes" parameterType="String" resultType="com.thundersdata.backend.basic.dto.WaybillConsignDTO">
+    select t1.id,
+      t1.consign_code consignCode,
+      t1.shipper_id shipperId,
+      shipper.owner_name shipperName,
+      shipper.contact shipperContact,
+      shipper.contact_phone shipperContactPhone,
+      t1.shipment_id shipmentId,
+      shipment.owner_name shipmentName,
+      shipment.contact shipmentContact,
+      shipment.contact_phone shipmentContactPhone,
+      t1.receiving_id receivingId,
+      receiving.owner_name receivingName,
+      receiving.contact receivingContact,
+      receiving.contact_phone receivingContactPhone,
+      t1.expediter_id expediterId,
+      expediter.owner_name expediterName,
+      expediter.contact expediterContact,
+      expediter.contact_phone expediterContactPhone,
+      t1.shipment_start shipmentStart,
+      t1.shipment_stop shipmentStop,
+      t1.shipment_time shipmentTime,
+      t1.shipment_arrive shipmentArrive,
+      t1.emergency_phone emergencyPhone,
+      t1.attention,
+      t1.measures,
+      t1.status,
+      t1.is_city,
+      t1.created_at,
+      t1.updated_at,
+      t1.is_deleted
+      from waybill_consign t1
+        left join waybill_owner shipper on t1.shipper_id = shipper.id and shipper.is_deleted = 0
+        left join waybill_owner receiving on t1.receiving_id = receiving.id and receiving.is_deleted = 0
+        left join waybill_owner shipment on t1.shipment_id = shipment.id and shipment.is_deleted = 0
+        left join waybill_owner expediter on t1.expediter_id = expediter.id and expediter.is_deleted = 0
+        where t1.is_deleted = 0
+        and t1.id in (#{ides})
+  </select>
+
+
+</mapper>

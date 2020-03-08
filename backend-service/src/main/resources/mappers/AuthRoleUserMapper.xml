@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.AuthRoleUserMapper">
+    <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.model.AuthRoleUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, role_id, user_id, created_at, updated_at, deleted
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from auth_role_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from auth_role_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByUser">
+    delete from auth_role_user
+    where user_id = #{personId}
+    </delete>
+    <insert id="insert" parameterType="com.thundersdata.backend.basic.model.AuthRoleUser">
+    insert into auth_role_user (id, role_id, user_id, 
+      created_at, updated_at, deleted
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.AuthRoleUser">
+        insert into auth_role_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.AuthRoleUser">
+        update auth_role_user
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.AuthRoleUser">
+    update auth_role_user
+    set role_id = #{roleId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <insert id="replaceIntoByUser">
+        replace into auth_role_user (role_id, user_id)
+        values
+        <foreach collection="roleList" item="item" index="index" separator=",">
+            (
+            #{item},
+            #{personId}
+            )
+        </foreach>
+
+    </insert>
+
+    <select id="selectByUser" resultType="com.thundersdata.backend.basic.dto.AuthRoleDTO">
+        select
+            auth_role_user.id,
+            role_id roleId,
+            user_id userId,
+            ar.scope,
+            ar.role_name roleName,
+            ar.description,
+            ar.is_admin isAdmin
+        from auth_role_user
+            left join auth_role ar on ar.id = role_id and ar.deleted = 0
+         where auth_role_user.deleted = 0
+         and user_id = #{personId}
+    </select>
+    <select id="selectResourceByUser" resultType="com.thundersdata.backend.basic.dto.AuthResourceDTO">
+        select distinct are.id,
+                are.resource_key resourceKey,
+                are.name,
+                are.order_value orderValue,
+                are.api_url apiUrl,
+                are.icon_url iconUrl,
+                are.type,
+                are.description,
+                are.parent_id parentId,
+                are.business
+        from auth_role_user t1
+               left join auth_role ar on t1.role_id = ar.id and ar.deleted = 0
+               left join auth_role_resource arr on ar.id = arr.role_id and arr.deleted = 0
+               left join auth_resource are on are.id = arr.resource_id and are.deleted = 0
+        where t1.deleted = 0
+          and t1.user_id = #{userId}
+    </select>
+
+</mapper>

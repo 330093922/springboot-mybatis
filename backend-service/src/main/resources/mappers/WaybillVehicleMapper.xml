@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.thundersdata.backend.basic.dao.WaybillVehicleMapper" >
+  <resultMap id="BaseResultMap" type="com.thundersdata.backend.basic.dto.WaybillVehicleDTO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="VARCHAR" />
+    <result column="owner_name" property="ownerName" jdbcType="VARCHAR" />
+    <result column="pilot" property="pilot" jdbcType="VARCHAR" />
+    <result column="supercargo" property="supercargo" jdbcType="VARCHAR" />
+    <result column="owner_type" property="ownerType" jdbcType="VARCHAR" />
+    <result column="vehicle_code" property="vehicleCode" jdbcType="VARCHAR" />
+    <result column="vehicle_model" property="vehicleModel" jdbcType="VARCHAR" />
+    <result column="vehicle_type" property="vehicleType" jdbcType="INTEGER" />
+    <result column="vehicle_status" property="vehicleStatus" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="INTEGER" />
+    <result column="manage_area" property="manageArea" jdbcType="VARCHAR" />
+    <result column="transport_number" property="transportNumber" jdbcType="VARCHAR" />
+    <result column="first_date" property="firstDate" jdbcType="DATE" />
+    <result column="expire_date" property="expireDate" jdbcType="DATE" />
+    <result column="grant_organ" property="grantOrgan" jdbcType="VARCHAR" />
+    <result column="load_capacity" property="loadCapacity" jdbcType="DECIMAL" />
+    <result column="ton" property="ton" jdbcType="DECIMAL" />
+    <result column="volume" property="volume" jdbcType="VARCHAR" />
+    <result column="tanks_no" property="tanksNo" jdbcType="VARCHAR" />
+    <result column="is_toxic" property="isToxic" jdbcType="INTEGER" />
+    <result column="is_etch" property="isEtch" jdbcType="INTEGER" />
+    <result column="is_explode" property="isExplode" jdbcType="INTEGER" />
+    <result column="insure_money" property="insureMoney" jdbcType="DOUBLE" />
+    <result column="insure_end_date" property="insureEndDate" jdbcType="DATE" />
+    <result column="default_pilot" property="defaultPilot" jdbcType="VARCHAR" />
+    <result column="default_supercargo" property="defaultSupercargo" jdbcType="VARCHAR" />
+    <result column="default_car" property="defaultCar" jdbcType="VARCHAR" />
+    <result column="default_car_code" property="defaultCarCode" jdbcType="VARCHAR" />
+    <result column="vehicle_rank" property="vehicleRank" jdbcType="VARCHAR" />
+    <result column="next_tec_date" property="nextTecDate" jdbcType="DATE" />
+    <result column="next_maintain_date" property="nextMaintainDate" jdbcType="DATE" />
+    <result column="next_check_date" property="nextCheckDate" jdbcType="DATE" />
+    <result column="cert_photo" property="certPhoto" jdbcType="VARCHAR" />
+    <result column="car_photo" property="carPhoto" jdbcType="VARCHAR" />
+    <result column="test_no" property="testNo" jdbcType="VARCHAR" />
+    <result column="transport_scope" property="transportScope" jdbcType="VARCHAR" />
+    <result column="map_color" property="mapColor" jdbcType="INTEGER" />
+    <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+    <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP" />
+    <result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, owner_id, vehicle_code, vehicle_model, vehicle_type, vehicle_status, color, manage_area, 
+    transport_number, first_date, expire_date, grant_organ, load_capacity, ton, volume, tanks_no,
+    is_toxic, is_etch, is_explode, insure_money, insure_end_date, default_pilot, default_supercargo, 
+    default_car, default_car_code, vehicle_rank, next_tec_date, next_maintain_date, next_check_date, 
+    cert_photo, car_photo, test_no, transport_scope, map_color, created_at, updated_at, 
+    is_deleted
+  </sql>
+  <sql id="Veh_Column_List" >
+    b.owner_id,b.id, vehicle_code, vehicle_model, vehicle_type, vehicle_status, color, manage_area,
+    transport_number, first_date, expire_date, grant_organ, load_capacity, ton, volume, tanks_no,
+    is_toxic, is_etch, is_explode, insure_money, insure_end_date, default_pilot, default_supercargo,
+    default_car, default_car_code, vehicle_rank, next_tec_date, next_maintain_date, next_check_date,
+    cert_photo, car_photo, test_no, transport_scope, map_color
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from waybill_vehicle
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from waybill_vehicle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.thundersdata.backend.basic.model.WaybillVehicle" >
+    insert into waybill_vehicle (id, owner_id, vehicle_code, 
+      vehicle_model, vehicle_type, vehicle_status, 
+      color, manage_area, transport_number, 
+      first_date, expire_date, grant_organ, 
+      load_capacity, ton, volume, tanks_no,
+      is_toxic, is_etch, is_explode, 
+      insure_money, insure_end_date, default_pilot, 
+      default_supercargo, default_car, default_car_code, 
+      vehicle_rank, next_tec_date, next_maintain_date, 
+      next_check_date, cert_photo, car_photo, 
+      test_no, transport_scope, map_color, 
+      created_at, updated_at, is_deleted
+      )
+    values (#{id,jdbcType=VARCHAR}, #{ownerId,jdbcType=VARCHAR}, #{vehicleCode,jdbcType=VARCHAR}, 
+      #{vehicleModel,jdbcType=VARCHAR}, #{vehicleType,jdbcType=INTEGER}, #{vehicleStatus,jdbcType=INTEGER}, 
+      #{color,jdbcType=INTEGER}, #{manageArea,jdbcType=VARCHAR}, #{transportNumber,jdbcType=VARCHAR}, 
+      #{firstDate,jdbcType=DATE}, #{expireDate,jdbcType=DATE}, #{grantOrgan,jdbcType=VARCHAR}, 
+      #{loadCapacity,jdbcType=DECIMAL}, #{ton,jdbcType=DECIMAL}, #{volume,jdbcType=VARCHAR}, #{tanksNo,jdbcType=VARCHAR},
+      #{isToxic,jdbcType=INTEGER}, #{isEtch,jdbcType=INTEGER}, #{isExplode,jdbcType=INTEGER}, 
+      #{insureMoney,jdbcType=DOUBLE}, #{insureEndDate,jdbcType=DATE}, #{defaultPilot,jdbcType=VARCHAR}, 
+      #{defaultSupercargo,jdbcType=VARCHAR}, #{defaultCar,jdbcType=VARCHAR}, #{defaultCarCode,jdbcType=VARCHAR}, 
+      #{vehicleRank,jdbcType=VARCHAR}, #{nextTecDate,jdbcType=DATE}, #{nextMaintainDate,jdbcType=DATE}, 
+      #{nextCheckDate,jdbcType=DATE}, #{certPhoto,jdbcType=VARCHAR}, #{carPhoto,jdbcType=VARCHAR}, 
+      #{testNo,jdbcType=VARCHAR}, #{transportScope,jdbcType=VARCHAR}, #{mapColor,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thundersdata.backend.basic.model.WaybillVehicle" >
+    insert into waybill_vehicle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="vehicleCode != null" >
+        vehicle_code,
+      </if>
+      <if test="vehicleModel != null" >
+        vehicle_model,
+      </if>
+      <if test="vehicleType != null" >
+        vehicle_type,
+      </if>
+      <if test="vehicleStatus != null" >
+        vehicle_status,
+      </if>
+      <if test="color != null" >
+        color,
+      </if>
+      <if test="manageArea != null" >
+        manage_area,
+      </if>
+      <if test="transportNumber != null" >
+        transport_number,
+      </if>
+      <if test="firstDate != null" >
+        first_date,
+      </if>
+      <if test="expireDate != null" >
+        expire_date,
+      </if>
+      <if test="grantOrgan != null" >
+        grant_organ,
+      </if>
+      <if test="loadCapacity != null" >
+        load_capacity,
+      </if>
+      <if test="ton != null" >
+        ton,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="tanksNo != null" >
+        tanks_no,
+      </if>
+      <if test="isToxic != null" >
+        is_toxic,
+      </if>
+      <if test="isEtch != null" >
+        is_etch,
+      </if>
+      <if test="isExplode != null" >
+        is_explode,
+      </if>
+      <if test="insureMoney != null" >
+        insure_money,
+      </if>
+      <if test="insureEndDate != null" >
+        insure_end_date,
+      </if>
+      <if test="defaultPilot != null" >
+        default_pilot,
+      </if>
+      <if test="defaultSupercargo != null" >
+        default_supercargo,
+      </if>
+      <if test="defaultCar != null" >
+        default_car,
+      </if>
+      <if test="defaultCarCode != null" >
+        default_car_code,
+      </if>
+      <if test="vehicleRank != null" >
+        vehicle_rank,
+      </if>
+      <if test="nextTecDate != null" >
+        next_tec_date,
+      </if>
+      <if test="nextMaintainDate != null" >
+        next_maintain_date,
+      </if>
+      <if test="nextCheckDate != null" >
+        next_check_date,
+      </if>
+      <if test="certPhoto != null" >
+        cert_photo,
+      </if>
+      <if test="carPhoto != null" >
+        car_photo,
+      </if>
+      <if test="testNo != null" >
+        test_no,
+      </if>
+      <if test="transportScope != null" >
+        transport_scope,
+      </if>
+      <if test="mapColor != null" >
+        map_color,
+      </if>
+      <if test="createdAt != null" >
+        created_at,
+      </if>
+      <if test="updatedAt != null" >
+        updated_at,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleCode != null" >
+        #{vehicleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleModel != null" >
+        #{vehicleModel,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null" >
+        #{vehicleType,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleStatus != null" >
+        #{vehicleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        #{color,jdbcType=INTEGER},
+      </if>
+      <if test="manageArea != null" >
+        #{manageArea,jdbcType=VARCHAR},
+      </if>
+      <if test="transportNumber != null" >
+        #{transportNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDate != null" >
+        #{firstDate,jdbcType=DATE},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=DATE},
+      </if>
+      <if test="grantOrgan != null" >
+        #{grantOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="loadCapacity != null" >
+        #{loadCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="ton != null" >
+        #{ton,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="tanksNo != null" >
+        #{tanksNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isToxic != null" >
+        #{isToxic,jdbcType=INTEGER},
+      </if>
+      <if test="isEtch != null" >
+        #{isEtch,jdbcType=INTEGER},
+      </if>
+      <if test="isExplode != null" >
+        #{isExplode,jdbcType=INTEGER},
+      </if>
+      <if test="insureMoney != null" >
+        #{insureMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="insureEndDate != null" >
+        #{insureEndDate,jdbcType=DATE},
+      </if>
+      <if test="defaultPilot != null" >
+        #{defaultPilot,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultSupercargo != null" >
+        #{defaultSupercargo,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCar != null" >
+        #{defaultCar,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCarCode != null" >
+        #{defaultCarCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleRank != null" >
+        #{vehicleRank,jdbcType=VARCHAR},
+      </if>
+      <if test="nextTecDate != null" >
+        #{nextTecDate,jdbcType=DATE},
+      </if>
+      <if test="nextMaintainDate != null" >
+        #{nextMaintainDate,jdbcType=DATE},
+      </if>
+      <if test="nextCheckDate != null" >
+        #{nextCheckDate,jdbcType=DATE},
+      </if>
+      <if test="certPhoto != null" >
+        #{certPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="carPhoto != null" >
+        #{carPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="testNo != null" >
+        #{testNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transportScope != null" >
+        #{transportScope,jdbcType=VARCHAR},
+      </if>
+      <if test="mapColor != null" >
+        #{mapColor,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thundersdata.backend.basic.model.WaybillVehicle" >
+    update waybill_vehicle
+    <set >
+      <if test="ownerId != null" >
+        owner_id = #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleCode != null" >
+        vehicle_code = #{vehicleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleModel != null" >
+        vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleType != null" >
+        vehicle_type = #{vehicleType,jdbcType=INTEGER},
+      </if>
+      <if test="vehicleStatus != null" >
+        vehicle_status = #{vehicleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="color != null" >
+        color = #{color,jdbcType=INTEGER},
+      </if>
+      <if test="manageArea != null" >
+        manage_area = #{manageArea,jdbcType=VARCHAR},
+      </if>
+      <if test="transportNumber != null" >
+        transport_number = #{transportNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="firstDate != null" >
+        first_date = #{firstDate,jdbcType=DATE},
+      </if>
+      <if test="expireDate != null" >
+        expire_date = #{expireDate,jdbcType=DATE},
+      </if>
+      <if test="grantOrgan != null" >
+        grant_organ = #{grantOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="loadCapacity != null" >
+        load_capacity = #{loadCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="ton != null" >
+        ton = #{ton,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=VARCHAR},
+      </if>
+      <if test="tanksNo != null" >
+        tanks_no = #{tanksNo,jdbcType=VARCHAR},
+      </if>
+      <if test="isToxic != null" >
+        is_toxic = #{isToxic,jdbcType=INTEGER},
+      </if>
+      <if test="isEtch != null" >
+        is_etch = #{isEtch,jdbcType=INTEGER},
+      </if>
+      <if test="isExplode != null" >
+        is_explode = #{isExplode,jdbcType=INTEGER},
+      </if>
+      <if test="insureMoney != null" >
+        insure_money = #{insureMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="insureEndDate != null" >
+        insure_end_date = #{insureEndDate,jdbcType=DATE},
+      </if>
+      <if test="defaultPilot != null" >
+        default_pilot = #{defaultPilot,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultSupercargo != null" >
+        default_supercargo = #{defaultSupercargo,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCar != null" >
+        default_car = #{defaultCar,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultCarCode != null" >
+        default_car_code = #{defaultCarCode,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleRank != null" >
+        vehicle_rank = #{vehicleRank,jdbcType=VARCHAR},
+      </if>
+      <if test="nextTecDate != null" >
+        next_tec_date = #{nextTecDate,jdbcType=DATE},
+      </if>
+      <if test="nextMaintainDate != null" >
+        next_maintain_date = #{nextMaintainDate,jdbcType=DATE},
+      </if>
+      <if test="nextCheckDate != null" >
+        next_check_date = #{nextCheckDate,jdbcType=DATE},
+      </if>
+      <if test="certPhoto != null" >
+        cert_photo = #{certPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="carPhoto != null" >
+        car_photo = #{carPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="testNo != null" >
+        test_no = #{testNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transportScope != null" >
+        transport_scope = #{transportScope,jdbcType=VARCHAR},
+      </if>
+      <if test="mapColor != null" >
+        map_color = #{mapColor,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null" >
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null" >
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="state !=null">
+        state = #{state}
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeySelectiveWithScope">
+    update waybill_vehicle
+    <set >
+      <if test="record.ownerId != null" >
+        owner_id = #{record.ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleCode != null" >
+        vehicle_code = #{record.vehicleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleModel != null" >
+        vehicle_model = #{record.vehicleModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleType != null" >
+        vehicle_type = #{record.vehicleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.vehicleStatus != null" >
+        vehicle_status = #{record.vehicleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.color != null" >
+        color = #{record.color,jdbcType=INTEGER},
+      </if>
+      <if test="record.manageArea != null" >
+        manage_area = #{record.manageArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transportNumber != null" >
+        transport_number = #{record.transportNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstDate != null" >
+        first_date = #{record.firstDate,jdbcType=DATE},
+      </if>
+      <if test="record.expireDate != null" >
+        expire_date = #{record.expireDate,jdbcType=DATE},
+      </if>
+      <if test="record.grantOrgan != null" >
+        grant_organ = #{record.grantOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loadCapacity != null" >
+        load_capacity = #{record.loadCapacity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ton != null" >
+        ton = #{record.ton,jdbcType=DECIMAL},
+      </if>
+      <if test="record.volume != null" >
+        volume = #{record.volume,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tanksNo != null" >
+        tanks_no = #{record.tanksNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isToxic != null" >
+        is_toxic = #{record.isToxic,jdbcType=INTEGER},
+      </if>
+      <if test="record.isEtch != null" >
+        is_etch = #{record.isEtch,jdbcType=INTEGER},
+      </if>
+      <if test="record.isExplode != null" >
+        is_explode = #{record.isExplode,jdbcType=INTEGER},
+      </if>
+      <if test="record.insureMoney != null" >
+        insure_money = #{record.insureMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.insureEndDate != null" >
+        insure_end_date = #{record.insureEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.defaultPilot != null" >
+        default_pilot = #{record.defaultPilot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultSupercargo != null" >
+        default_supercargo = #{record.defaultSupercargo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultCar != null" >
+        default_car = #{record.defaultCar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultCarCode != null" >
+        default_car_code = #{record.defaultCarCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleRank != null" >
+        vehicle_rank = #{record.vehicleRank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextTecDate != null" >
+        next_tec_date = #{record.nextTecDate,jdbcType=DATE},
+      </if>
+      <if test="record.nextMaintainDate != null" >
+        next_maintain_date = #{record.nextMaintainDate,jdbcType=DATE},
+      </if>
+      <if test="record.nextCheckDate != null" >
+        next_check_date = #{record.nextCheckDate,jdbcType=DATE},
+      </if>
+      <if test="record.certPhoto != null" >
+        cert_photo = #{record.certPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carPhoto != null" >
+        car_photo = #{record.carPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testNo != null" >
+        test_no = #{record.testNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transportScope != null" >
+        transport_scope = #{record.transportScope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mapColor != null" >
+        map_color = #{record.mapColor,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdAt != null" >
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null" >
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeleted != null" >
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.state !=null">
+        state = #{record.state}
+      </if>
+    </set>
+    where id = #{record.id,jdbcType=VARCHAR}
+    <if test="isScope">
+      and owner_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+  </update>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.thundersdata.backend.basic.model.WaybillVehicle" >
+    update waybill_vehicle
+    set owner_id = #{ownerId,jdbcType=VARCHAR},
+      vehicle_code = #{vehicleCode,jdbcType=VARCHAR},
+      vehicle_model = #{vehicleModel,jdbcType=VARCHAR},
+      vehicle_type = #{vehicleType,jdbcType=INTEGER},
+      vehicle_status = #{vehicleStatus,jdbcType=INTEGER},
+      color = #{color,jdbcType=INTEGER},
+      manage_area = #{manageArea,jdbcType=VARCHAR},
+      transport_number = #{transportNumber,jdbcType=VARCHAR},
+      first_date = #{firstDate,jdbcType=DATE},
+      expire_date = #{expireDate,jdbcType=DATE},
+      grant_organ = #{grantOrgan,jdbcType=VARCHAR},
+      load_capacity = #{loadCapacity,jdbcType=DECIMAL},
+      ton = #{ton,jdbcType=DECIMAL},
+      volume = #{volume,jdbcType=VARCHAR},
+      tanks_no = #{tanksNo,jdbcType=VARCHAR},
+      is_toxic = #{isToxic,jdbcType=INTEGER},
+      is_etch = #{isEtch,jdbcType=INTEGER},
+      is_explode = #{isExplode,jdbcType=INTEGER},
+      insure_money = #{insureMoney,jdbcType=DOUBLE},
+      insure_end_date = #{insureEndDate,jdbcType=DATE},
+      default_pilot = #{defaultPilot,jdbcType=VARCHAR},
+      default_supercargo = #{defaultSupercargo,jdbcType=VARCHAR},
+      default_car = #{defaultCar,jdbcType=VARCHAR},
+      default_car_code = #{defaultCarCode,jdbcType=VARCHAR},
+      vehicle_rank = #{vehicleRank,jdbcType=VARCHAR},
+      next_tec_date = #{nextTecDate,jdbcType=DATE},
+      next_maintain_date = #{nextMaintainDate,jdbcType=DATE},
+      next_check_date = #{nextCheckDate,jdbcType=DATE},
+      cert_photo = #{certPhoto,jdbcType=VARCHAR},
+      car_photo = #{carPhoto,jdbcType=VARCHAR},
+      test_no = #{testNo,jdbcType=VARCHAR},
+      transport_scope = #{transportScope,jdbcType=VARCHAR},
+      map_color = #{mapColor,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      is_deleted = #{isDeleted,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <!--  条件查询数量-->
+  <select id="getCountByCondition" resultType="java.lang.Integer">
+    select count(*)
+    FROM
+    waybill_vehicle b
+    left join waybill_owner a
+    on a.id = b.owner_id and a.is_deleted = 0
+    WHERE
+    b.is_deleted = 0
+
+    <if test="queryVO.vehicleCode != null and queryVO.vehicleCode != ''">
+      and vehicle_code like CONCAT('%',#{queryVO.vehicleCode},'%')
+    </if>
+    <if test="queryVO.vehicleType != null and queryVO.vehicleType != ''">
+      and vehicle_type = #{queryVO.vehicleType}
+    </if>
+    <if test="queryVO.vehicleStatus != null and queryVO.vehicleStatus != ''">
+      and vehicle_status = #{queryVO.vehicleStatus}
+    </if>
+    <if test="isScope">
+      and b.owner_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+
+  </select>
+
+  <!--  条件查询列表-->
+  <select id="getListByCondition" resultMap="BaseResultMap" >
+    SELECT
+      b.id,
+      a.owner_name owner_name,
+      b.vehicle_code,
+      b.vehicle_model,
+      b.vehicle_type,
+      b.color,
+      b.vehicle_status,
+      b.transport_number,
+      b.tanks_no
+    FROM
+      waybill_vehicle b
+    left join waybill_owner a on a.id = b.owner_id
+    WHERE
+    b.is_deleted = 0
+    <if test="queryVO.vehicleCode != null and queryVO.vehicleCode != ''">
+      and vehicle_code like CONCAT('%',#{queryVO.vehicleCode},'%')
+    </if>
+    <if test="queryVO.vehicleType != null and queryVO.vehicleType != ''">
+      and vehicle_type = #{queryVO.vehicleType}
+    </if>
+    <if test="queryVO.vehicleStatus != null and queryVO.vehicleStatus != ''">
+      and vehicle_status = #{queryVO.vehicleStatus}
+    </if>
+    <if test="isScope">
+      and b.owner_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+    </if>
+
+    order by b.created_at desc
+    limit #{limit} offset #{offset}
+  </select>
+
+  <!--  查询详情-->
+  <select id="getDetailsByCondition" resultMap="BaseResultMap" >
+    SELECT
+      a.owner_name,
+      a.owner_type,
+      c.name pilot,
+      d.name supercargo,
+      gps.lon as lon ,
+      gps.lat as lat,
+    <include refid="Veh_Column_List" />
+    FROM
+    waybill_vehicle b
+    LEFT JOIN
+    waybill_owner a
+    on a.id = b.owner_id
+    LEFT JOIN
+    waybill_user c
+    on b.default_pilot = c.id
+    LEFT JOIN
+    waybill_user d
+    on b.default_supercargo = d.id
+    LEFT JOIN
+    waybill_vehicle_gps gps
+    on b.id = gps.vehicle_id
+    where
+    b.id = #{id}
+    and b.is_deleted = 0 ORDER BY gps.id desc limit  1
+  </select>
+
+  <!--货车和挂车状态修改-->
+  <update id="stateModification"  parameterType="com.thundersdata.backend.basic.model.WaybillVehicle">
+    update waybill_vehicle
+    set
+    <if test="state != null" >
+      state =  #{state,jdbcType=INTEGER}
+    </if>
+    <where>
+      id = #{id}
+      <if test="vehicleStatus !=null">
+        or id = #{vehicleStatus}
+      </if>
+    </where>
+  </update>
+  <!--  车辆下拉框-->
+  <select id="dropList" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id,vehicle_code,vehicle_type,transport_number
+    from waybill_vehicle
+    <where>
+      <if test="vehicleCode != null and vehicleCode != '' ">
+        vehicle_code like concat('%',#{vehicleCode},'%')
+      </if>
+      and is_deleted=0 and state = 0  limit 20
+    </where>
+  </select>
+
+  <!--  车辆下拉框 带权限-->
+  <select id="dropListWithScope" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id,vehicle_code,vehicle_type,transport_number
+    from waybill_vehicle
+    <where>
+     <if test="vehicleCode != null and vehicleCode != '' ">
+         vehicle_code like concat('%',#{vehicleCode},'%')
+     </if>
+      <if test="isScope">
+      and owner_id in
+      <foreach collection="ownerIds" item="item" index="index"
+               open="(" separator="," close=")">
+        #{item}
+      </foreach>
+      </if>
+    and is_deleted=0 and state = 0 limit 20
+    </where>
+  </select>
+
+  <!--  删除车辆-->
+  <update id="deleteWaybillVehicle" >
+    update
+        waybill_vehicle
+    set
+        is_deleted = 1
+    where
+    id in
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+        #{item.id}
+    </foreach>
+    <if test="isScope">
+    and owner_id in
+    <foreach collection="ownerIds" item="item" index="index"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    </if>
+  </update>
+
+
+  <update id="updateStates">
+    update waybill_vehicle
+    set state = 0
+    where id = #{trailerId} or id = #{vehicleId}
+  </update>
+
+  <!--查询过期道路运输证号车辆 -->
+  <select id="ExpiredVehicle" resultType="com.thundersdata.backend.basic.vo.UserExpiredVO" >
+    select v.id as id,
+           v.owner_id as ownerId,
+           v.vehicle_code as name,
+           v.expire_date as employedEndDate
+    from waybill_vehicle v JOIN waybill_owner o on v.owner_id = o.id
+    where
+          (o.province = #{userExpiredDTO.province}
+          and o.city = #{userExpiredDTO.city}
+          and o.county = #{userExpiredDTO.county}
+          and o.is_deleted = 0)
+          and v.expire_date &lt; #{newTime}
+          and v.is_deleted = 0
+  </select>
+  <!--查询过期道路运输证号车辆 时间段-->
+  <select id="HistoryExpiredVehicle"  parameterType="com.thundersdata.backend.basic.dto.UserExpiredDTO" resultType="com.thundersdata.backend.basic.vo.UserExpiredVO">
+    select v.id as id,
+           v.owner_id as ownerId,
+           v.vehicle_code as name,
+           v.expire_date as employedEndDate
+    from waybill_vehicle v JOIN waybill_owner o on v.owner_id = o.id
+    where
+            (o.province = #{userExpiredDTO.province}
+            and o.city = #{userExpiredDTO.city}
+            and o.county = #{userExpiredDTO.county}
+            and o.is_deleted = 0)
+            and v.expire_date BETWEEN #{userExpiredDTO.startDate} and #{userExpiredDTO.endDate}
+            and v.is_deleted = 0
+    </select>
+  <!--车辆行驶轨迹查询-->
+  <select id="VehicleTrack" parameterType="com.thundersdata.backend.basic.dto.VehicleTrackDTO" resultType="com.thundersdata.backend.basic.vo.VehicleTrackVO">
+    SELECT jps.vehicle_id as vehicleId,
+            jps.lon as lon,
+            jps.lat as lat,
+            jps.elevation as elevation,
+            jps.speed as speed,
+            jps.direction as direction,
+            jps.created_at as created_at,
+            wv.vehicle_code as vehicleCode
+        from waybill_vehicle_gps jps JOIN  waybill_vehicle wv
+        on jps.vehicle_id = wv.id
+        where jps.vehicle_id = #{vehicleTrackDTO.vehicleId}
+        and jps.created_at
+        between #{vehicleTrackDTO.startDate} and #{vehicleTrackDTO.endDate}
+        order by jps.id asc
+  </select>
+
+
+</mapper>
